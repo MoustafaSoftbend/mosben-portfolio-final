@@ -1,0 +1,182 @@
+:root {
+  --animation-color: orange;
+}
+
+section.contact-section svg > :nth-child(10),
+section.contact-section svg > :nth-child(11),
+section.contact-section svg > :nth-child(17),
+section.contact-section svg > :nth-child(18),
+section.contact-section svg > :nth-child(19) {
+  /* fill: black !important; */
+  animation: gearAnimation 1s ease infinite;
+}
+
+section.contact-section svg > :nth-child(183) {
+  animation: scale-server-up 1s ease infinite;
+}
+
+section.contact-section svg > :nth-child(182) {
+  animation: scale-server-down 1s ease infinite;
+  animation-delay: 1s;
+}
+
+section.contact-section svg > :nth-child(46),
+section.contact-section svg > :nth-child(47),
+/* section.contact-section svg > :nth-child(48), */
+/* section.contact-section svg > :nth-child(49), */
+section.contact-section svg > :nth-child(50),
+section.contact-section svg > :nth-child(51),
+/* section.contact-section svg > :nth-child(52), */
+/* section.contact-section svg > :nth-child(53), */
+/* section.contact-section svg > :nth-child(54), */
+/* section.contact-section svg > :nth-child(55), */
+/* section.contact-section svg > :nth-child(56), */
+section.contact-section svg > :nth-child(57),
+section.contact-section svg > :nth-child(58),
+/* section.contact-section svg > :nth-child(59), */
+/* section.contact-section svg > :nth-child(60), */
+section.contact-section svg > :nth-child(61),
+section.contact-section svg > :nth-child(62),
+/* section.contact-section svg > :nth-child(63), */
+/* section.contact-section svg > :nth-child(64), */
+section.contact-section svg > :nth-child(65),
+section.contact-section svg > :nth-child(66),
+section.contact-section svg > :nth-child(67),
+section.contact-section svg > :nth-child(100),
+section.contact-section svg > :nth-child(108),
+section.contact-section svg > :nth-child(124),
+section.contact-section svg > :nth-child(126),
+section.contact-section svg > :nth-child(128),
+section.contact-section svg > :nth-child(130),
+section.contact-section svg > :nth-child(132),
+section.contact-section svg > :nth-child(134),
+section.contact-section svg > :nth-child(138),
+section.contact-section svg > :nth-child(140),
+section.contact-section svg > :nth-child(142),
+section.contact-section svg > :nth-child(144),
+section.contact-section svg > :nth-child(159),
+section.contact-section svg > :nth-child(160),
+section.contact-section svg > :nth-child(169),
+section.contact-section svg > :nth-child(177),
+section.contact-section svg > :nth-child(178),
+section.contact-section svg > :nth-child(77) {
+  animation: wakeServer 1s ease-in-out infinite;
+}
+
+section.contact-section svg > :nth-child(29),
+section.contact-section svg > :nth-child(30) {
+  animation: plugCable 5s ease infinite;
+  animation-delay: 2s;
+}
+
+section.contact-section svg > :nth-child(28) {
+  stroke: grey;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 280; /* Set the dash array length to the total length of the path */
+  stroke-dashoffset: 280; /* Start with the path hidden */
+  animation: draw 5s ease infinite;
+}
+
+section.contact-section svg > :nth-child(31),
+section.contact-section svg > :nth-child(32),
+section.contact-section svg > :nth-child(33),
+section.contact-section svg > :nth-child(34),
+section.contact-section svg > :nth-child(35),
+section.contact-section svg > :nth-child(36),
+section.contact-section svg > :nth-child(37),
+section.contact-section svg > :nth-child(38) {
+  animation: cloud 2s ease infinite;
+}
+
+section.contact-section svg > :nth-child(245),
+section.contact-section svg > :nth-child(246),
+section.contact-section svg > :nth-child(247),
+section.contact-section svg > :nth-child(248) {
+  animation: arrows 2s ease infinite;
+}
+
+@keyframes gearAnimation {
+  from {
+    fill: #000000;
+  }
+  /* 60% {
+    fill: black !important;
+  } */
+  to {
+    fill: #ba68c8;
+  }
+}
+@keyframes scale-server-up {
+  from {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(1.01);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes scale-server-down {
+  from {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.99);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes wakeServer {
+  from {
+    fill: var(--animation-color);
+  }
+  60% {
+    fill: var(--animation-color);
+  }
+  to {
+    fill: transparent;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0; /* Draw the entire path */
+  }
+}
+@keyframes plugCable {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0; /* Draw the entire path */
+  }
+}
+
+@keyframes cloud {
+  from {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes arrows {
+  from {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(1.02);
+    /* fill: orange; */
+  }
+  to {
+    transform: scaleY(1);
+    fill: var(--animation-color);
+  }
+}
