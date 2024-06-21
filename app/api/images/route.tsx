@@ -54,6 +54,7 @@ const handlePostRequest = async (options) => {
   // Get the url and fullPage from the options
   const { url, fullPage } = options;
   const index = options.index;
+  const folderName = options.folderName || "Folder_0";
 
   // Launch a new browser using puppeteer
   const browser = await puppeteer.launch({
@@ -69,7 +70,7 @@ const handlePostRequest = async (options) => {
   const path = `public/screenshots/${index !== undefined ? `screen_${index}` : "screen"}`;
 
   // Navigate to the url
-  await page.goto(url);
+  await page.goto(url, { waitUntil: "load" });
 
   // // Take a screenshot of the page
   // await page.screenshot({
@@ -129,6 +130,7 @@ const handlePostRequest = async (options) => {
   const uploadResponse = await handleCloudinaryUpload({
     path,
     folder: true,
+    folderName,
   });
   console.log(uploadResponse);
   // Delete the screenshot from the server

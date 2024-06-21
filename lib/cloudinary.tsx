@@ -28,10 +28,10 @@ export const handleGetCloudinaryResource = (publicId) => {
  * Get cloudinary uploads
  * @returns {Promise}
  */
-export const handleGetCloudinaryUploads = () => {
+export const handleGetCloudinaryUploads = (folderName) => {
   return cloudinary.api.resources({
     type: "upload",
-    prefix: CLOUDINARY_FOLDER_NAME,
+    prefix: `${CLOUDINARY_FOLDER_NAME}/${folderName}`,
     resource_type: "image",
   });
 };

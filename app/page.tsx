@@ -28,7 +28,7 @@ import { scroller } from "../utils/scroller.tsx";
 import { fade_left, fade_right, fade_text_svg } from "../utils/faders";
 import { typer } from "../utils/typer";
 import { cardRotation } from "../utils/cardRotation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Server_svg from "../public/images/server_svg.svg";
 
@@ -44,17 +44,29 @@ export default function Home() {
     },
   };
 
+  const [screenShots, setScreenShots] = useState();
+
   useEffect(() => {
     scroller();
     fade_left();
     fade_right();
     cardRotation();
     fade_text_svg();
-    screenshotsController("https://pq8gdh-3000.csb.app/");
+    const links = document.querySelectorAll("a.card");
+    const linkLength = links.length;
+    links.forEach((link) => {});
+    // setTimeout(() => {
+    //   const screens = setScreenShots(
+    //     screenshotsController("https://7kwlxf-3000.csb.app/")
+    //   );
+    //   console.log(screens);
+    // }, 100000);
+    // setScreenShots(screenshotsController("https://7kwlxf-3000.csb.app/"));
+
     setTimeout(() => {
       typer();
     }, 2000);
-  }, []);
+  }, [screenShots]);
   return (
     <>
       <header className="page-head intersect">
