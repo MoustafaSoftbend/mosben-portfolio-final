@@ -1,4 +1,5 @@
 {
+    "version": 2,
     "build": {
       "env": {
         "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
@@ -6,10 +7,10 @@
       }
     },
     "functions": {
-      "api/**/*": {
+      "api/**/*.js": {
         "memory": 1024,
         "maxDuration": 10,
-        "runtime": "nodejs20.x"
+        "runtime": "nodejs18.x"
       }
     },
     "routes": [
