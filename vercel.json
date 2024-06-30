@@ -10,7 +10,7 @@
       "api/**/*.js": {
         "memory": 1024,
         "maxDuration": 10,
-        "runtime": "nodejs18.x"
+        "runtime": "nodejs16.x"
       }
     },
     "routes": [
@@ -19,5 +19,4 @@
         "dest": "/api/$1"
       }
     ]
-  }
-  
+  }  
