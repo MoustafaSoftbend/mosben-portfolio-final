@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "apt-get update && apt-get install -y chromium-browser --no-install-recommends"
-}
+    "postinstall": "apt-get update && apt-get install -y libdbus-1-3"
   },
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
