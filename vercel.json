@@ -7,7 +7,7 @@
     }
   },
   "functions": {
-    "api/**/*.js": {
+    "app/api/**/*.js": {
       "memory": 1024,
       "maxDuration": 10
     }
