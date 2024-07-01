@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <>
       <header className="page-head intersect">
-        <img
+        <Image
           src="/images/band.png"
           alt="Description"
           // height={500}
@@ -290,22 +290,22 @@ export default function Home() {
           <div className="carousel-container">
             <Link href="/" className="card">
               <div className="card-img-grid">
-                <img
+                <Image
                   src="\images\portfolio\Screenshot 2024-04-24 220823.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\portfolio\Screenshot 2024-04-24 220843.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\portfolio\Screenshot 2024-04-24 220859.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\portfolio\Screenshot 2024-04-24 220953.png"
                   alt=""
                   srcset=""
@@ -322,12 +322,12 @@ export default function Home() {
 
             <div className="card">
               <div className="card-img-grid">
-                <img
+                <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225337.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225440.png"
                   alt=""
                   srcset=""
@@ -337,7 +337,7 @@ export default function Home() {
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225418.png"
                   alt=""
                   srcset=""
@@ -353,22 +353,22 @@ export default function Home() {
             </div>
             <div className="card">
               <div className="card-img-grid">
-                <img
+                <Image
                   src="\images\tech-blog\Screenshot 2024-04-23 223903.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\tech-blog\Screenshot 2024-04-23 223926.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\tech-blog\Screenshot 2024-04-23 224001.png"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="\images\tech-blog\Screenshot 2024-04-23 224029.png"
                   alt=""
                   srcset=""
@@ -385,22 +385,22 @@ export default function Home() {
 
             <div className="card">
               <div className="card-img-grid">
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   alt=""
                   srcset=""
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   alt=""
                   srcset=""
