@@ -7,7 +7,7 @@ import puppeteer from "puppeteer";
 import {
   handleCloudinaryUpload,
   handleGetCloudinaryUploads,
-} from "../../../lib/cloudinary";
+} from "../../lib/cloudinary";
 import { promises as fs } from "fs";
 
 import { NextRequest, NextResponse } from "next/server";
