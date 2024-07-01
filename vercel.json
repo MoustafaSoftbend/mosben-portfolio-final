@@ -6,12 +6,6 @@
         "CHROMIUM_PATH": "/usr/bin/chromium-browser"
       }
     },
-    "functions": {
-      "api/**/*.js": {
-        "memory": 1024,
-        "maxDuration": 10,
-      }
-    },
     "routes": [
       {
         "src": "/api/(.*)",
