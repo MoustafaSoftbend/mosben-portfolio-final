@@ -18,7 +18,11 @@ export async function GET(request: NextRequest) {
     console.log("Uploads:", uploads);
     return NextResponse.json(uploads);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
+    }
   }
 }
 
@@ -41,7 +45,11 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json(results);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
+    }
   }
 }
 const handleGetRequest = async () => {
