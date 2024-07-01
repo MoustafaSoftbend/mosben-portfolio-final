@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
     }
   }
 }
-const handleGetRequest = async () => {
-  const uploads = await handleGetCloudinaryUploads();
+const handleGetRequest = async (options) => {
+  const folderName = options.folderName || "Folder_0";
 
   return uploads;
 };
