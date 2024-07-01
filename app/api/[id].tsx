@@ -1,7 +1,7 @@
 // pages/api/images/[id].js
 
 import { NextApiRequest, NextApiResponse } from "next";
-import { handleCloudinaryDelete } from "../../../lib/cloudinary";
+import { handleCloudinaryDelete } from "../../lib/cloudinary";
 
 /**
  * The handler function for the API route. Takes in an incoming request and outgoing response.
