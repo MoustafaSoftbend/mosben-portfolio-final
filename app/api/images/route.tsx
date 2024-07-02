@@ -21,7 +21,10 @@ export async function GET(request: NextRequest) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 },
+      );
     }
   }
 }
@@ -48,15 +51,18 @@ export async function POST(request: NextRequest) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 },
+      );
     }
   }
 }
-const handleGetRequest = async (options) => {
-  const folderName = options.folderName || "Folder_0";
-
-  return uploads;
-};
+// const handleGetRequest = async () => {
+//   const folderName = "";
+//   const uploads = await handleGetCloudinaryUploads(folderName);
+//   return uploads;
+// };
 
 const handlePostRequest = async (options) => {
   // Get the url and fullPage from the options
@@ -66,8 +72,8 @@ const handlePostRequest = async (options) => {
 
   // Launch a new browser using puppeteer
   const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium-browser'
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium-browser",
   });
 
   // Create a new page in the browser
