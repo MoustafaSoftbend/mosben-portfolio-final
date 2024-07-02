@@ -1,6 +1,3 @@
-// pages/api/images/index.js
-
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 "use server";
 
 import puppeteer from "puppeteer";
@@ -9,10 +6,9 @@ import {
   handleGetCloudinaryUploads,
 } from "../../../lib/cloudinary";
 import { promises as fs } from "fs";
-
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(request) {
   try {
     const uploads = await handleGetRequest();
     console.log("Uploads:", uploads);
@@ -29,21 +25,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request) {
   try {
     const { url, fullPage } = await request.json();
 
-    // Check if the url variable is an array
     let results;
     if (Array.isArray(url)) {
-      // Handle multiple URLs
       results = await Promise.all(
         url.map((screenshot, index) =>
           handlePostRequest({ url: screenshot, fullPage, index }),
         ),
       );
     } else {
-      // Handle single URL
       results = await handlePostRequest({ url, fullPage });
     }
     return NextResponse.json(results);
@@ -58,48 +51,35 @@ export async function POST(request: NextRequest) {
     }
   }
 }
-// const handleGetRequest = async () => {
-//   const folderName = "";
-//   const uploads = await handleGetCloudinaryUploads(folderName);
-//   return uploads;
-// };
+
+const handleGetRequest = async () => {
+  const uploads = await handleGetCloudinaryUploads();
+  return uploads;
+};
 
 const handlePostRequest = async (options) => {
-  // Get the url and fullPage from the options
-  const { url, fullPage } = options;
-  const index = options.index;
-  const folderName = options.folderName || "Folder_0";
+  const { url, fullPage, index } = options;
 
-  // Launch a new browser using puppeteer
+  // Use URL hostname as folder name to group screenshots
+  const folderName = new URL(url).hostname.replace(/\./g, "_");
+
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium-browser",
   });
 
-  // Create a new page in the browser
   const page = await browser.newPage();
-
-  const urlObject = new URL(url);
-
-  // Define a path where the screenshot will be saved
   const path = `public/screenshots/${index !== undefined ? `screen_${index}` : "screen"}`;
 
-  // Navigate to the url
   await page.goto(url, { waitUntil: "load" });
 
-  // // Take a screenshot of the page
-  // await page.screenshot({
-  //   path,
-  //   fullPage,
-  // });
-  // Function to scroll and take screenshots
   const takeScreenshotsWhileScrolling = async () => {
     const height = await page.evaluate("document.body.scrollHeight");
     let scrollPosition = 0;
-    let index = 0;
+    let idx = 0;
 
     while (scrollPosition < height) {
-      const filePath = `${path}_${index}.png`;
+      const filePath = `${path}_${Date.now()}_${idx}.png`;
 
       await page.screenshot({
         path: filePath,
@@ -108,17 +88,13 @@ const handlePostRequest = async (options) => {
 
       await page.evaluate("window.scrollBy(0, window.innerHeight)");
       scrollPosition += await page.evaluate("window.innerHeight");
-      index++;
+      idx++;
     }
   };
 
-  // Take screenshots while scrolling
   await takeScreenshotsWhileScrolling();
-
-  // Close the browser once done
   await browser.close();
 
-  // Upload all screenshots to Cloudinary
   const screenshots = await fs.readdir("public/screenshots");
   const uploadResponses = await Promise.all(
     screenshots
@@ -129,6 +105,7 @@ const handlePostRequest = async (options) => {
         const uploadResponse = await handleCloudinaryUpload({
           path: `public/screenshots/${screenshot}`,
           folder: true,
+          folderName,
         });
         console.log(uploadResponse);
         await fs.unlink(`public/screenshots/${screenshot}`);
@@ -137,19 +114,4 @@ const handlePostRequest = async (options) => {
   );
 
   return uploadResponses;
-
-  // Close the browser once done
-  await browser.close();
-
-  // Upload the screenshot to cloudinary
-  const uploadResponse = await handleCloudinaryUpload({
-    path,
-    folder: true,
-    folderName,
-  });
-  console.log(uploadResponse);
-  // Delete the screenshot from the server
-  await fs.unlink(path);
-
-  return uploadResponse;
 };
