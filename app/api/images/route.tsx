@@ -1,5 +1,3 @@
-"use server";
-
 import puppeteer from "puppeteer";
 import {
   handleCloudinaryUpload,
@@ -8,7 +6,7 @@ import {
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   try {
     const uploads = await handleGetRequest();
     console.log("Uploads:", uploads);
@@ -25,18 +23,21 @@ export async function GET(request) {
   }
 }
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   try {
     const { url, fullPage } = await request.json();
 
+    // Check if the url variable is an array
     let results;
     if (Array.isArray(url)) {
+      // Handle multiple URLs
       results = await Promise.all(
         url.map((screenshot, index) =>
           handlePostRequest({ url: screenshot, fullPage, index }),
         ),
       );
     } else {
+      // Handle single URL
       results = await handlePostRequest({ url, fullPage });
     }
     return NextResponse.json(results);
@@ -53,15 +54,19 @@ export async function POST(request) {
 }
 
 const handleGetRequest = async () => {
-  const uploads = await handleGetCloudinaryUploads();
+  const folderName = "";
+  const uploads = await handleGetCloudinaryUploads(folderName);
   return uploads;
 };
 
-const handlePostRequest = async (options) => {
+const handlePostRequest = async (options: {
+  url: string;
+  fullPage: boolean;
+  index?: number;
+  folderName?: string;
+}) => {
   const { url, fullPage, index } = options;
-
-  // Use URL hostname as folder name to group screenshots
-  const folderName = new URL(url).hostname.replace(/\./g, "_");
+  const folderName = options.folderName || "Folder_0";
 
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -69,6 +74,9 @@ const handlePostRequest = async (options) => {
   });
 
   const page = await browser.newPage();
+
+  const urlObject = new URL(url);
+
   const path = `public/screenshots/${index !== undefined ? `screen_${index}` : "screen"}`;
 
   await page.goto(url, { waitUntil: "load" });
@@ -76,10 +84,10 @@ const handlePostRequest = async (options) => {
   const takeScreenshotsWhileScrolling = async () => {
     const height = await page.evaluate("document.body.scrollHeight");
     let scrollPosition = 0;
-    let idx = 0;
+    let index = 0;
 
     while (scrollPosition < height) {
-      const filePath = `${path}_${Date.now()}_${idx}.png`;
+      const filePath = `${path}_${index}.png`;
 
       await page.screenshot({
         path: filePath,
@@ -88,11 +96,12 @@ const handlePostRequest = async (options) => {
 
       await page.evaluate("window.scrollBy(0, window.innerHeight)");
       scrollPosition += await page.evaluate("window.innerHeight");
-      idx++;
+      index++;
     }
   };
 
   await takeScreenshotsWhileScrolling();
+
   await browser.close();
 
   const screenshots = await fs.readdir("public/screenshots");
@@ -105,7 +114,7 @@ const handlePostRequest = async (options) => {
         const uploadResponse = await handleCloudinaryUpload({
           path: `public/screenshots/${screenshot}`,
           folder: true,
-          folderName,
+          folderName: `${folderName}/${urlObject.hostname}`,
         });
         console.log(uploadResponse);
         await fs.unlink(`public/screenshots/${screenshot}`);
