@@ -1,22 +1,21 @@
 {
-    "version": 2,
-    "build": {
-      "env": {
-        "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
-        "CHROMIUM_PATH": "/usr/bin/chromium-browser"
-      }
-    },
-    "functions": {
-      "api/**/*.js": {
-        "memory": 1024,
-        "maxDuration": 10,
-        "runtime": "nodejs16.x"
-      }
-    },
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/$1"
-      }
-    ]
-  }  
+  "version": 2,
+  "build": {
+    "env": {
+      "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
+      "CHROMIUM_PATH": "/usr/bin/chromium-browser"
+    }
+  },
+  "functions": {
+    "app/api/**/*.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ]
+}

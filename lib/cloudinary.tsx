@@ -1,65 +1,37 @@
-// lib/cloudinary.js
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
-// Import the v2 api and rename it to cloudinary
-import { v2 as cloudinary, TransformationOptions } from "cloudinary";
+dotenv.config();
 
-// Initialize the sdk with cloud_name, api_key and api_secret
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const CLOUDINARY_FOLDER_NAME = "portfolio-screenshots/";
-
-/**
- * Gets a resource from cloudinary using its public id
- *
- * @param {string} publicId The public id of the image
- */
-export const handleGetCloudinaryResource = (publicId) => {
-  return cloudinary.api.resource(publicId, {
-    resource_type: "image",
-    type: "upload",
+export const handleCloudinaryUpload = async ({ path, folderName }) => {
+  const result = await cloudinary.uploader.upload(path, {
+    folder: folderName,
+    public_id: `${Date.now()}_${Math.floor(Math.random() * 1000)}`,
   });
+  return result;
 };
 
-/**
- * Get cloudinary uploads
- * @returns {Promise}
- */
-export const handleGetCloudinaryUploads = (folderName) => {
-  return cloudinary.api.resources({
-    type: "upload",
-    prefix: `${CLOUDINARY_FOLDER_NAME}/${folderName}`,
-    resource_type: "image",
-  });
-};
+export const handleGetCloudinaryUploads = async () => {
+  const resources = await cloudinary.search
+    .expression("resource_type:image")
+    .sort_by("created_at", "desc")
+    .max_results(500)
+    .execute();
 
-/**
- * Uploads an image to cloudinary and returns the upload result
- *
- * @param {{path: string; transformation?:TransformationOptions;publicId?: string; folder?: boolean; }} resource
- */
-export const handleCloudinaryUpload = (resource) => {
-  return cloudinary.uploader.upload(resource.path, {
-    // Folder to store image in
-    folder: resource.folder ? CLOUDINARY_FOLDER_NAME : null,
-    // Public id of image.
-    public_id: resource.publicId,
-    // Type of resource
-    resource_type: "auto",
-    // Transformation to apply to the video
-    transformation: resource.transformation,
-  });
-};
+  const groupedResources = resources.resources.reduce((acc, resource) => {
+    const folderName = resource.folder;
+    if (!acc[folderName]) {
+      acc[folderName] = [];
+    }
+    acc[folderName].push(resource);
+    return acc;
+  }, {});
 
-/**
- * Deletes resources from cloudinary. Takes in an array of public ids
- * @param {string[]} ids
- */
-export const handleCloudinaryDelete = (ids) => {
-  return cloudinary.api.delete_resources(ids, {
-    resource_type: "image",
-  });
+  return groupedResources;
 };
