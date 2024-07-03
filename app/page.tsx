@@ -70,14 +70,15 @@ export default function Home() {
   return (
     <>
       <header className="page-head intersect">
-        <Image
-          src="/images/band.png"
-          alt="Description"
-          // height={500}
-          // width={500}
-          // layout="responsive"
-          className="silder-band"
-        />
+        <div className="slider-band absolute w-[50%] top-0 left-0 h-fit">
+          <Image
+            src="/images/band.png"
+            alt="Description"
+            layout="fill"
+            className="silder-band"
+          />
+        </div>
+
         <Navbar />
         <div className="nav-content container">
           <div className="nav-img-container">
@@ -226,9 +227,10 @@ export default function Home() {
           <div className="about-section-container flex flex-col">
             <div className="profile-img-container block relative">
               <div className="profile-overlay profile"></div>
-              <img
+              <Image
                 className="profile-picture profile"
                 src="/images/profile.jpg"
+                layout="fill"
                 alt=""
               />
             </div>
@@ -290,26 +292,30 @@ export default function Home() {
           <div className="carousel-container">
             <Link href="/" className="card">
               <div className="card-img-grid">
-                <Image
-                  src="\images\portfolio\Screenshot 2024-04-24 220823.png"
-                  alt=""
-                  srcset=""
-                />
-                <Image
-                  src="\images\portfolio\Screenshot 2024-04-24 220843.png"
-                  alt=""
-                  srcset=""
-                />
-                <Image
-                  src="\images\portfolio\Screenshot 2024-04-24 220859.png"
-                  alt=""
-                  srcset=""
-                />
-                <Image
-                  src="\images\portfolio\Screenshot 2024-04-24 220953.png"
-                  alt=""
-                  srcset=""
-                />
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220823.png"
+                    layout="fill"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220843.png"
+                    layout="fill"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220859.png"
+                    layout="fill"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220953.png"
+                    layout="fill"
+                  />
+                </div>
               </div>
               <div className="card-body">
                 <h1 className="card-title">Tech Blog</h1>
@@ -324,23 +330,19 @@ export default function Home() {
               <div className="card-img-grid">
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225337.png"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225440.png"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
-                <img
+                <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225401.png"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225418.png"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
               </div>
               <div className="card-body">
@@ -354,24 +356,20 @@ export default function Home() {
             <div className="card">
               <div className="card-img-grid">
                 <Image
-                  src="\images\tech-blog\Screenshot 2024-04-23 223903.png"
-                  alt=""
-                  srcset=""
+                  src="/images/tech-blog/Screenshot 2024-04-23 223903.png"
+                  layout="fill"
                 />
                 <Image
-                  src="\images\tech-blog\Screenshot 2024-04-23 223926.png"
-                  alt=""
-                  srcset=""
+                  src="/images/tech-blog/Screenshot 2024-04-23 223926.png"
+                  layout="fill"
                 />
                 <Image
-                  src="\images\tech-blog\Screenshot 2024-04-23 224001.png"
-                  alt=""
-                  srcset=""
+                  src="/images/tech-blog/Screenshot 2024-04-23 224001.png"
+                  layout="fill"
                 />
                 <Image
-                  src="\images\tech-blog\Screenshot 2024-04-23 224029.png"
-                  alt=""
-                  srcset=""
+                  src="/images/tech-blog/Screenshot 2024-04-23 224029.png"
+                  layout="fill"
                 />
               </div>
               <div className="card-body">
@@ -385,25 +383,21 @@ export default function Home() {
 
             <div className="card">
               <div className="card-img-grid">
-                <Image
+                <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
-                <Image
+                <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
-                <Image
+                <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
-                <Image
+                <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
-                  alt=""
-                  srcset=""
+                  layout="fill"
                 />
               </div>
               <div className="card-body">
