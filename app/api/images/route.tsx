@@ -81,7 +81,7 @@ const handlePostRequest = async (options: {
   await page.goto(url, { waitUntil: "load" });
 
   const takeScreenshotsWhileScrolling = async () => {
-    const height = await page.evaluate("document.body.scrollHeight");
+    const height: number = await page.evaluate("document.body.scrollHeight");
     let scrollPosition = 0;
     let index = 0;
 
