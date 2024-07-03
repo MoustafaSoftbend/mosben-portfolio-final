@@ -385,19 +385,19 @@ export default function Home() {
 
             <div className="card">
               <div className="card-img-grid">
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
                 />
-                <img
+                <Image
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
                 />

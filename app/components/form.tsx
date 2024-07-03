@@ -71,12 +71,12 @@ const Form = () => {
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="min-[500px]:flex min-[500px]:flex-row">
-        <label className={errors.name && "red-shadow"} for="first-name">
+        <label className={errors.name && "red-shadow"} htmlFor="first-name">
           <FontAwesomeIcon className="icon" icon={faUser} />
           <div className="input-box">
             <input
               placeholder="First Name"
-              Name="first-name"
+              name="first-name"
               {...register("name", { required: "First Name is required" })}
             />
             {errors.name && (
@@ -137,13 +137,9 @@ const Form = () => {
         </div>
       </label>
       <button
-        type="button"
         className="btn btn-primary"
         type="submit"
         onClick={() => {
-          // setValue("lastName", "luo"); // ✅
-          // setValue("firstName", true); // ❌: true is not string
-          // errors.bill; // ❌: property bill does not exist
           console.log(errors);
         }}
       >
