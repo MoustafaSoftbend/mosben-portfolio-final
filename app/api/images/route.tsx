@@ -52,16 +52,9 @@ export async function POST(request: NextRequest) {
     }
   }
 }
-<<<<<<< HEAD
-const handleGetRequest = async (options) => {
-  const folderName = options.folderName || "Folder_0";
-  const uploads = await handleGetCloudinaryUploads(folderName);
-
-=======
 
 const handleGetRequest = async () => {
   const uploads = await handleGetCloudinaryUploads();
->>>>>>> remotes/origin/draft/nifty-goodall
   return uploads;
 };
 
