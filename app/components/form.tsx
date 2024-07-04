@@ -36,7 +36,7 @@ const Form = () => {
     const input = document.querySelectorAll(".contact-form .input-box input");
     input.forEach((inputField) => {
       inputField.addEventListener("focus", () => {
-        if (inputField.value.trim() !== "") {
+        if ((inputField as HTMLInputElement).value.trim() !== "") {
           document.documentElement.style.setProperty(
             "--animation-color",
             "#03c7ad",
@@ -51,7 +51,7 @@ const Form = () => {
 
       // Add event listener for input
       inputField.addEventListener("input", () => {
-        if (inputField.value.trim() !== "") {
+        if ((inputField as HTMLInputElement).value.trim() !== "") {
           document.documentElement.style.setProperty(
             "--animation-color",
             "#03c7ad",
