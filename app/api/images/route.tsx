@@ -81,7 +81,9 @@ const handlePostRequest = async (options: {
   await page.goto(url, { waitUntil: "load" });
 
   const takeScreenshotsWhileScrolling = async () => {
-    const height: number = await page.evaluate(() => document.body.scrollHeight as number);
+    const height: number = await page.evaluate(
+      () => document.body.scrollHeight as number,
+    );
     let scrollPosition = 0;
     let index = 0;
 
@@ -94,7 +96,10 @@ const handlePostRequest = async (options: {
       });
 
       await page.evaluate("window.scrollBy(0, window.innerHeight)");
-      scrollPosition += await page.evaluate("window.innerHeight");
+      const innerHeight = (await page.evaluate(
+        () => window.innerHeight,
+      )) as number;
+      scrollPosition += innerHeight;
       index++;
     }
   };
