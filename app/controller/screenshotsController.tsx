@@ -2,57 +2,63 @@
 
 import axios from "axios";
 
-export const screenshotsController = async (url, foldername = "default") => {
-  let screens = {};
-  const response = await get_screens();
-  if (response.status == 200) {
-    console.log(response);
-    screens = response;
+export const screenshotsController = async (
+  url: string,
+  foldername: string = "default",
+) => {
+  let screens: any = {};
+
+  try {
+    const screensExist = await getScreens();
+
+    if (screensExist) {
+      console.log("Screens already exist:", screensExist);
+      screens = screensExist;
+      return screens;
+    }
+
+    const createdScreens = await createScreens(url, foldername);
+
+    if (createdScreens) {
+      console.log("Screens created successfully:", createdScreens);
+      screens = createdScreens;
+      return screens;
+    }
+
     return screens;
+  } catch (error) {
+    console.error("Error in screenshotsController:", error);
+    return screens; // Return empty screens or handle error as per your application logic
   }
-  response = await createScreens(url, foldername);
-  if (response.status == 200) {
-    console.log(response);
-    screens = response;
-    return screens;
-  }
-  return screens;
 };
 
-const get_screens = async () => {
+const getScreens = async () => {
   try {
-    const response = await axios.get("api/images");
-    return response.data.resources.length > 0;
+    const response = await axios.get("/api/images");
+    return response.data; // Assuming response.data contains the screens or an indication of existence
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      return false;
+      return false; // Screens do not exist
     }
     throw error;
   }
 };
 
-const createScreens = async (url, foldername) => {
+const createScreens = async (url: string, foldername: string) => {
   try {
     const response = await axios.post("/api/images", {
       url: url,
       fullPage: true,
-      foldername,
+      foldername: foldername,
     });
 
-    if (!response.ok) {
-      throw data;
+    if (response.status === 200) {
+      return response.data; // Assuming response.data contains the created screens
+    } else {
+      throw new Error("Failed to create screens");
     }
   } catch (error) {
-    console.error(error);
-  } finally {
+    console.error("Error creating screens:", error);
+    throw error;
   }
 };
-// const args = process.argv.slice(2);
-
-// // Check if there are any arguments
-// if (args.length === 0) {
-//   const url = args[0];
-//   console.log("Process started... ", url);
-//   screenshotsController(url);
-//   process.exit(1);
-// }
