@@ -54,8 +54,8 @@ const fade = (
   return null; // No JSX return for utility function
 };
 
-export const fadeLeft = () => fade(".fade-left");
-export const fadeRight = () => fade(".fade-right", 0, "translateX(0)");
-export const fadeTextSvg = () => {
+export const fade_left = () => fade(".fade-left");
+export const fade_right = () => fade(".fade-right", 0, "translateX(0)");
+export const fade_text_svg = () => {
   fade(".orbit-svg-container h1.pivot-text", 0, "translateX(100%)", 2000, 0.75); // Adjust threshold as needed
 };
