@@ -1,92 +1,61 @@
-export const fade_left = () => {
-  const left_faders = document.querySelectorAll(".fade-left");
+import { useRef, useEffect } from "react"; // Assuming React integration
 
-  // left_faders.forEach((el) => {
-  //   el.style.opacity = 0;
-  //   el.style.transform = "translateX(-100%)";
-  // });
+// Type definition for IntersectionObserver options
+interface IntersectionObserverOptions {
+  root?: HTMLElement | null;
+  rootMargin?: string;
+  threshold: number;
+}
 
-  const observerOptions = {
-    root: null, // Use the viewport as the root
-    rootMargin: "0px 1000px 0px 1000px", // No margin around the root
-    threshold: 0.1, // Trigger when 50% of the observed element is visible
-  };
-  const intersection = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = "translateX(0%)";
-      }
-    });
-  };
+// Reusable fade function with animation options
+const fade = (
+  selector: string,
+  initialOpacity: number = 0,
+  initialTransform: string = "translateX(-100%)",
+  animationDuration: number = 2000,
+  threshold: number = 0.5, // Adjust based on your needs
+) => {
+  const elements = useRef<HTMLElement[]>(null);
 
-  const observer = new IntersectionObserver(intersection, observerOptions);
+  useEffect(() => {
+    const observerOptions: IntersectionObserverOptions = {
+      root: null, // Use viewport as root
+      threshold,
+    };
 
-  left_faders.forEach((fader) => {
-    observer.observe(fader);
-  });
+    const intersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateX(0%)";
+        } else {
+          entry.target.style.opacity = initialOpacity.toString();
+          entry.target.style.transform = initialTransform;
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(intersection, observerOptions);
+
+    if (elements.current) {
+      elements.current.forEach((element) => observer.observe(element));
+    }
+
+    return () => {
+      observer.disconnect(); // Clean up observer on unmount
+    };
+  }, [elements.current, threshold]); // Re-run effect when elements or threshold changes
+
+  useEffect(() => {
+    const selectedElements = document.querySelectorAll(selector);
+    elements.current = Array.from(selectedElements);
+  }, [selector]); // Re-run effect when selector changes
+
+  return null; // No JSX return for utility function
 };
-export const fade_right = () => {
-  const right_faders = document.querySelectorAll(".fade_right");
 
-  // right_faders.forEach((el) => {
-  //   el.style.opacity = 0;
-  //   el.style.transform = "translateX(0)";
-  // });
-
-  const observerOptions = {
-    root: null, // Use the viewport as the root
-    rootMargin: "0px 1000px 0px 1000px", // No margin around the root
-    threshold: 0.5, // Trigger when 50% of the observed element is visible
-  };
-  const intersection = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = 1;
-        entry.target.style.transform = "translateX(0%)";
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(intersection, observerOptions);
-
-  right_faders.forEach((fader) => {
-    observer.observe(fader);
-  });
-};
-
-export const fade_text_svg = () => {
-  const pivot_text = document.querySelectorAll(
-    ".orbit-svg-container h1.pivot-text",
-  );
-  const container = document.querySelector("section.services-section");
-  const svg = document.querySelector(".orbit-svg-container svg");
-  const observerOptions = {
-    root: null, // Use the viewport as the root
-    // rootMargin: "0px 1000px 0px 1000px",
-    threshold: 0.5, // Trigger when 50% of the observed element is visible
-  };
-
-  const intersection = (intersectionEntry) => {
-    intersectionEntry.forEach((entry) => {
-      if (entry.isIntersecting) {
-        svg.style.opacity = 1;
-        svg.style.transform = "scale(1)";
-        setTimeout(() => {
-          pivot_text.forEach((el) => {
-            el.style.opacity = 1;
-            el.style.transform = "translateX(0%)";
-          });
-        }, 2000);
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(intersection, observerOptions);
-  observer.observe(container);
-
-  // pivot_text.forEach((el) => {
-  //   console.log(el);
-  //   observer.observe(el);
-  // });
+export const fadeLeft = () => fade(".fade-left");
+export const fadeRight = () => fade(".fade-right", 0, "translateX(0)");
+export const fadeTextSvg = () => {
+  fade(".orbit-svg-container h1.pivot-text", 0, "translateX(100%)", 2000, 0.75); // Adjust threshold as needed
 };
