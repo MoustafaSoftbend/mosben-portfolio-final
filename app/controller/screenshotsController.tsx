@@ -32,8 +32,6 @@ export const screenshotsController = async (
   }
 };
 
-import axios, { AxiosError } from "axios";
-
 const getScreens = async () => {
   try {
     const response = await axios.get("/api/images");
