@@ -36,8 +36,8 @@ const getScreens = async () => {
   try {
     const response = await axios.get("/api/images");
     return response.data; // Assuming response.data contains the screens or an indication of existence
-  } catch (error) {
-    if (error.response && error.response.status === 404) {
+  } catch (error: unknown) {
+    if ((error as Error).response && (error as Error).response.status === 404) {
       return false; // Screens do not exist
     }
     throw error;
