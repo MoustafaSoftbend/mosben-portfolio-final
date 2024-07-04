@@ -77,6 +77,7 @@ export default function Home() {
             alt="Description"
             layout="fill"
             className="silder-band"
+            alt="Band image"
           />
         </div>
 
@@ -227,13 +228,9 @@ export default function Home() {
 
           <div className="about-section-container flex flex-col">
             <div className="profile-img-container block relative">
-              <div className="profile-overlay profile">
-                <Image
-                  className="profile-picture profile"
-                  src="/images/profile.jpg"
-                  layout="fill"
-                  alt=""
-                />
+              <div className="profile-overlay"></div>
+              <div className="profile-picture profile">
+                <Image src="/images/profile.jpg" layout="fill" alt="" />
               </div>
             </div>
 
@@ -298,24 +295,28 @@ export default function Home() {
                   <Image
                     src="/images/portfolio/Screenshot 2024-04-24 220823.png"
                     layout="fill"
+                    alt="Screenshot of the portfolio"
                   />
                 </div>
                 <div>
                   <Image
                     src="/images/portfolio/Screenshot 2024-04-24 220843.png"
                     layout="fill"
+                    alt="Screenshot of the portfolio"
                   />
                 </div>
                 <div>
                   <Image
                     src="/images/portfolio/Screenshot 2024-04-24 220859.png"
                     layout="fill"
+                    alt="Screenshot of the portfolio"
                   />
                 </div>
                 <div>
                   <Image
                     src="/images/portfolio/Screenshot 2024-04-24 220953.png"
                     layout="fill"
+                    alt="Screenshot of the portfolio"
                   />
                 </div>
               </div>
@@ -333,18 +334,22 @@ export default function Home() {
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225337.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225440.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225401.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/energy-website/Screenshot 2024-04-23 225418.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
               </div>
               <div className="card-body">
@@ -360,18 +365,22 @@ export default function Home() {
                 <Image
                   src="/images/tech-blog/Screenshot 2024-04-23 223903.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/tech-blog/Screenshot 2024-04-23 223926.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/tech-blog/Screenshot 2024-04-23 224001.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <Image
                   src="/images/tech-blog/Screenshot 2024-04-23 224029.png"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
               </div>
               <div className="card-body">
@@ -388,18 +397,22 @@ export default function Home() {
                 <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
                 <img
                   src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
                   layout="fill"
+                  alt="Screenshot of the portfolio"
                 />
               </div>
               <div className="card-body">
