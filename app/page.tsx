@@ -226,19 +226,14 @@ export default function Home() {
 
           <div className="about-section-container flex flex-col">
             <div className="profile-img-container block relative">
-<<<<<<< HEAD
-              <div className="profile-overlay profile"></div>
-=======
               <div className="profile-overlay profile">
->>>>>>> 21e4a07ecec17410fc46e8feb90bb97225d0c884
-              <Image
-                className="profile-picture profile"
-                src="/images/profile.jpg"
-                layout="fill"
-                alt=""
-              />
+                <Image
+                  className="profile-picture profile"
+                  src="/images/profile.jpg"
+                  layout="fill"
+                  alt=""
+                />
               </div>
-
             </div>
 
             <div className="profile-content">
