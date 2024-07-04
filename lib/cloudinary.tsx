@@ -45,8 +45,11 @@ export const handleGetCloudinaryUploads = async () => {
     .max_results(500)
     .execute();
 
-  const groupedResources = resources.resources.reduce<Accumulator>(
-    (acc, resource: Resource) => {
+  // Use a type assertion to tell TypeScript about the type of resources.resources
+  const resourceArray = resources.resources as Resource[];
+
+  const groupedResources = resourceArray.reduce<Accumulator>(
+    (acc, resource) => {
       const folderName = resource.folder;
       if (!acc[folderName]) {
         acc[folderName] = [];
