@@ -11,7 +11,7 @@ export const cardRotation = () => {
   const intersection: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        (entry.target as HTMLElement).style.opacity = 1;
+        (entry.target as HTMLElement).style.opacity = "1";
         (entry.target as HTMLElement).style.transform =
           "rotateY(0deg) translateX(0%)";
       }
