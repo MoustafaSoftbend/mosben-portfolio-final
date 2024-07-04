@@ -8,12 +8,18 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
 interface UploadParams {
   path: string;
   folderName: string;
   folder: boolean;
 }
-export const handleCloudinaryUpload = async ({ path, folderName }) => {
+
+export const handleCloudinaryUpload = async ({
+  path,
+  folderName,
+  folder,
+}: UploadParams) => {
   const result = await cloudinary.uploader.upload(path, {
     folder: folderName,
     public_id: `${Date.now()}_${Math.floor(Math.random() * 1000)}`,
