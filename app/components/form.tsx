@@ -1,6 +1,5 @@
 "use client";
 
-// import * as React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 
@@ -79,7 +78,6 @@ const Form = () => {
           <div className="input-box">
             <input
               placeholder="First Name"
-              name="first-name"
               {...register("firstName", { required: "First Name is required" })}
             />
             {errors.firstName && (
@@ -95,7 +93,6 @@ const Form = () => {
             <input
               {...register("lastName", { required: "Last Name is required" })}
               placeholder="Last Name"
-              name="last-name"
             />
             {errors.lastName && (
               <span className="error-span">{errors.lastName.message}</span>
@@ -110,7 +107,6 @@ const Form = () => {
         <div className="input-box">
           <input
             placeholder="example@company.com"
-            name="email"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -130,7 +126,6 @@ const Form = () => {
         <div className="input-box">
           <textarea
             placeholder="Write message here..."
-            name="message"
             {...register("message", { required: "Message is required" })}
           />
           <span className="message-label">Message</span>
