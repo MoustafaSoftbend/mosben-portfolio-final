@@ -8,7 +8,9 @@ export const cardRotation = () => {
   };
 
   // Define the type for the entries parameter
-  const intersection: IntersectionObserverCallback = (entries) => {
+  const intersection: IntersectionObserverCallback = (
+    entries: IntersectionObserverEntry[],
+  ) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         (entry.target as HTMLElement).style.opacity = "1";
