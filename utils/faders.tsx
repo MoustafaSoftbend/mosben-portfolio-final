@@ -26,8 +26,15 @@ const fade = (
     const intersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateX(0%)";
+          // Ensure entry.target is a valid HTMLElement before accessing style
+          if (entry.target instanceof HTMLElement) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateX(0%)";
+          } else {
+            console.warn(
+              `Expected entry.target to be an HTMLElement, but received ${typeof entry.target}`,
+            );
+          }
         } else {
           entry.target.style.opacity = initialOpacity.toString();
           entry.target.style.transform = initialTransform;
