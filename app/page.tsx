@@ -74,7 +74,6 @@ export default function Home() {
         <div className="slider-band absolute w-[50%] top-0 left-0 h-fit">
           <Image
             src="/images/band.png"
-            alt="Description"
             layout="fill"
             className="silder-band"
             alt="Band image"
@@ -230,7 +229,11 @@ export default function Home() {
             <div className="profile-img-container block relative">
               <div className="profile-overlay"></div>
               <div className="profile-picture profile">
-                <Image src="/images/profile.jpg" layout="fill" alt="" />
+                <Image
+                  src="/images/profile.jpg"
+                  layout="fill"
+                  alt="Profile pic"
+                />
               </div>
             </div>
 
