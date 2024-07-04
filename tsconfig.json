@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["axios"],
+    "types": ["axios", "react-lottie"],
     "plugins": [
       {
         "name": "next"
