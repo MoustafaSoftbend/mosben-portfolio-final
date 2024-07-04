@@ -109,6 +109,7 @@ const handlePostRequest = async (options: {
   await browser.close();
 
   const screenshots = await fs.readdir("public/screenshots");
+
   const uploadResponses = await Promise.all(
     screenshots
       .filter((screenshot) =>
