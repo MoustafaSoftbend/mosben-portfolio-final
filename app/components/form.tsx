@@ -1,7 +1,7 @@
 "use client";
 
 // import * as React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,9 +25,9 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
     // Send data to backend or do whatever you want
   };
@@ -71,16 +71,19 @@ const Form = () => {
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="min-[500px]:flex min-[500px]:flex-row">
-        <label className={errors.name && "red-shadow"} htmlFor="first-name">
+        <label
+          className={errors.firstName ? "red-shadow" : ""}
+          htmlFor="first-name"
+        >
           <FontAwesomeIcon className="icon" icon={faUser} />
           <div className="input-box">
             <input
               placeholder="First Name"
               name="first-name"
-              {...register("name", { required: "First Name is required" })}
+              {...register("firstName", { required: "First Name is required" })}
             />
-            {errors.name && (
-              <span className="error-span">{errors.name.message}</span>
+            {errors.firstName && (
+              <span className="error-span">{errors.firstName.message}</span>
             )}
             <span className="label-span">First Name</span>
           </div>
@@ -90,12 +93,12 @@ const Form = () => {
           <FontAwesomeIcon className="icon" icon={faUsers} />
           <div className="input-box">
             <input
-              {...register("surname", { required: "Surname is required" })}
+              {...register("lastName", { required: "Last Name is required" })}
               placeholder="Last Name"
               name="last-name"
             />
-            {errors.surname && (
-              <span className="error-span">{errors.surname.message}</span>
+            {errors.lastName && (
+              <span className="error-span">{errors.lastName.message}</span>
             )}
             <span className="label-span">Last Name</span>
           </div>
