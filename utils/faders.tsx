@@ -15,7 +15,7 @@ const fade = (
   animationDuration: number = 2000,
   threshold: number = 0.5, // Adjust based on your needs
 ) => {
-  const elements = useRef<HTMLElement[]>(null);
+  const elements = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const observerOptions: IntersectionObserverOptions = {
