@@ -6,12 +6,13 @@ interface TypedCharacter extends HTMLElement {
 }
 
 export const typer = () => {
-  const charListRef = useRef<TypedCharacter[]>(null);
+  const charListRef = useRef<TypedCharacter[]>([]); // Initialize with an empty array
 
   useEffect(() => {
-    const charList = document.querySelectorAll(
+    const nodeList = document.querySelectorAll(
       ".nav-body h1.nav-title span.typed-char",
-    ) as TypedCharacter[]; // Type assertion (if structure is guaranteed)
+    );
+    const charList = Array.from(nodeList) as TypedCharacter[]; // Convert NodeList to array and assert type
 
     charListRef.current = charList;
 
