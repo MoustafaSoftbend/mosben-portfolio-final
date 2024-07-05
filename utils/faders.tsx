@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"; // Assuming React integration
+import { useRef, useEffect } from "react";
 
 // Type definition for IntersectionObserver options
 interface IntersectionObserverOptions {
@@ -26,18 +26,15 @@ const fade = (
     const intersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Ensure entry.target is a valid HTMLElement before accessing style
           if (entry.target instanceof HTMLElement) {
             entry.target.style.opacity = "1";
             entry.target.style.transform = "translateX(0%)";
-          } else {
-            console.warn(
-              `Expected entry.target to be an HTMLElement, but received ${typeof entry.target}`,
-            );
           }
         } else {
-          entry.target.style.opacity = initialOpacity.toString();
-          entry.target.style.transform = initialTransform;
+          if (entry.target instanceof HTMLElement) {
+            entry.target.style.opacity = initialOpacity.toString();
+            entry.target.style.transform = initialTransform;
+          }
         }
       });
     };
@@ -55,7 +52,7 @@ const fade = (
 
   useEffect(() => {
     const selectedElements = document.querySelectorAll(selector);
-    elements.current = Array.from(selectedElements);
+    elements.current = Array.from(selectedElements) as HTMLElement[];
   }, [selector]); // Re-run effect when selector changes
 
   return null; // No JSX return for utility function
