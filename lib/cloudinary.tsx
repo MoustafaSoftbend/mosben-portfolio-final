@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 interface UploadParams {
@@ -17,8 +17,7 @@ interface UploadParams {
 
 export const handleCloudinaryUpload = async ({
   path,
-  folderName,
-  folder,
+  folderName = "/portfolio-screenshots",
 }: UploadParams) => {
   const result = await cloudinary.uploader.upload(path, {
     folder: folderName,
@@ -38,27 +37,28 @@ type Accumulator = {
   [key: string]: Resource[];
 };
 
-export const handleGetCloudinaryUploads = async () => {
-  const resources = await cloudinary.search
-    .expression("resource_type:image")
-    .sort_by("created_at", "desc")
-    .max_results(500)
-    .execute();
+export const handleGetCloudinaryUploads = async (folderName = "Folder_0") => {
+  // const resources = await cloudinary.search
+  //   .expression(`${folderName} && resource_type:image`)
+  //   .sort_by("created_at", "desc")
+  //   .max_results(500)
+  //   .execute();
+  const resources = await cloudinary.api.sub_folders(folderName)
 
   // Use a type assertion to tell TypeScript about the type of resources.resources
-  const resourceArray = resources.resources as Resource[];
+  // const resourceArray = resources.resources as Resource[];
 
-  const groupedResources = resourceArray.reduce<Accumulator>(
-    (acc, resource) => {
-      const folderName = resource.folder;
-      if (!acc[folderName]) {
-        acc[folderName] = [];
-      }
-      acc[folderName].push(resource);
-      return acc;
-    },
-    {},
-  );
+  // const groupedResources = resourceArray.reduce<Accumulator>(
+  //   (acc, resource) => {
+  //     const folderName = resource.folder;
+  //     if (!acc[folderName]) {
+  //       acc[folderName] = [];
+  //     }
+  //     acc[folderName].push(resource);
+  //     return acc;
+  //   },
+  //   {},
+  // );
 
-  return groupedResources;
+  return resources;
 };
