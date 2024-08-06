@@ -35,6 +35,7 @@ import { useEffect, useState } from "react";
 import Server_svg from "../public/images/server_svg.svg";
 
 import { screenshotsController } from "./controller/screenshotsController";
+import getStatic from "./controller/getStatic"
 
 const Home = () => {
   const defaultOptions = {
@@ -46,69 +47,26 @@ const Home = () => {
     },
   };
 
-  const [screenShots, setScreenShots] = useState([]);
-  const [urlsState, setUrlsState] = useState([]);
-
-  scroller();
-  useFade(".fade_left", 0, "translateX(0)");
-  useFade(".fade_right", 0, "translateX(0)");
-  useFade(
-    ".orbit-svg-container h1.pivot-text",
-    0,
-    "translateX(100%)",
-    2000,
-    0.75,
-  );
-  useFade(".orbit-svg-container svg");
-
-  typer();
+  const [screenShots, setScreenShots] = useState();
 
   useEffect(() => {
     cardRotation();
-    // fade_text_svg();
-    const fetchData = async (urls: string[]) => {
-      try {
-        const screens = await screenshotsController(urls);
-        if (Array.isArray(screens)) {
-          setScreenShots(screens);
-        }
-      } catch (error) {
-        console.error("Error fetching screenshots:", error);
-      }
-    };
-    // const urls = Array.from(document.querySelectorAll("a.card")).map(
-    //   (a) => a.href,
-    // );
+    fade_text_svg();
+    const links = document.querySelectorAll("a.card");
+    const linkLength = links.length;
+    links.forEach((link) => { });
+    // setTimeout(() => {
+    //   const screens = setScreenShots(
+    //     screenshotsController("https://7kwlxf-3000.csb.app/")
+    //   );
+    //   console.log(screens);
+    // }, 100000);
+    // setScreenShots(screenshotsController("https://7kwlxf-3000.csb.app/"));
 
-    const urls = ["https://7kwlxf-3000.csb.app/"];
-    if (urlsState.length == 0) {
-      setUrlsState(["https://7kwlxf-3000.csb.app/"]);
-    }
-    console.log(urlsState);
-    // const linkLength = urls.length;
-    // let screenShots = screenshotsController(urls);
-
-    if (
-      urlsState.length > 0 &&
-      screenShots.length == 0 &&
-      urlsState.length != screenShots.length
-    ) {
-      console.log(screenShots.length);
-      // fetchData(urlsState);
-      const intervalId = setInterval(fetchData(urlsState), 60000);
-    }
-    if (screenShots.length > 0) {
-      // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
-      screenShots.forEach((screen, index) => {
-        console.log(screen[Object.keys(screen)[0]][0].secure_url);
-      });
-    }
-
-    // links.forEach((link) => {});
-    // let screenShots = screenshotsController("https://7kwlxf-3000.csb.app/");
-    // Set up an interval to fetch data periodically
-    //   const intervalId = setInterval(fetchData, 2000); // Fetch data every 5 seconds
-  }, [screenShots, urlsState]);
+    setTimeout(() => {
+      typer();
+    }, 2000);
+  }, [screenShots]);
   return (
     <>
       <header className="page-head intersect">
@@ -334,111 +292,140 @@ const Home = () => {
             icon={faCircleArrowLeft}
           />
           <div className="carousel-container">
-            {screenShots && screenShots.length > 0 ? (
-              screenShots.map((screen, index) =>
-                <Link href=
-                  {urlsState && urlsState.length > 0 ? urlsState[0] : '/'} className="card">
-                  <div className="card-img-grid">
-                    <div>
-                      <Image
-                        src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][0].url
-                            : "/images/img-loader.svg"
-                        }
-                        layout="fill"
-                        alt="Screenshot of the portfolio"
-                      />
-                    </div>
-                    <div>
-                      <Image
-                        src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][1].url
-                            : "/images/img-loader.svg"
-                        }
-                        layout="fill"
-                        alt="Screenshot of the portfolio"
-                      />
-                    </div>
-                    <div>
-                      <Image
-                        src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][2].url
-                            : "/images/img-loader.svg"
-                        }
-                        layout="fill"
-                        alt="Screenshot of the portfolio"
-                      />
-                    </div>
-                    <div>
-                      <Image
-                        src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][3].url
-                            : "/images/img-loader.svg"
-                        }
-                        layout="fill"
-                        alt="Screenshot of the portfolio"
-                      />
-                    </div>
+            <Link href="/" className="card">
+              <div className="card-img-grid">
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220823.png"
+                    layout="fill"
+                    alt="Screenshot of the portfolio"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220843.png"
+                    layout="fill"
+                    alt="Screenshot of the portfolio"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220859.png"
+                    layout="fill"
+                    alt="Screenshot of the portfolio"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src="/images/portfolio/Screenshot 2024-04-24 220953.png"
+                    layout="fill"
+                    alt="Screenshot of the portfolio"
+                  />
+                </div>
+              </div>
+              <div className="card-body">
+                <h1 className="card-title">Tech Blog</h1>
+                <small className="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolore, quod.
+                </small>
+              </div>
+            </Link>
 
-                  </div>
-                  <div className="card-body">
-                    <h1 className="card-title">Tech Blog</h1>
-                    <small className="card-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Dolore, quod.
-                    </small>
-                  </div>
-                </Link>
-              )
-            ) : (
-              <Link href="/" className="card">
-                <div className="card-img-grid">
-                  <div className="img-loader">
-                    <Image
-                      className="img-loader p-[3]"
-                      src="/images/img-loader.svg"
-                      layout="fill"
-                      alt="Screenshot of the portfolio"
-                    />
-                  </div>
-                  <div className="img-loader">
-                    <Image
-                      className="img-loader"
-                      src="/images/img-loader.svg"
-                      layout="fill"
-                      alt="Screenshot of the portfolio"
-                    />
-                  </div>
-                  <div className="img-loader">
-                    <Image
-                      className="img-loader"
-                      src="/images/img-loader.svg"
-                      layout="fill"
-                      alt="Screenshot of the portfolio"
-                    />
-                  </div>
-                  <div className="img-loader">
-                    <Image
-                      className="img-loader"
-                      src="/images/img-loader.svg"
-                      layout="fill"
-                      alt="Screenshot of the portfolio"
-                    />
-                  </div>
-                </div>
-                <div className="card-body">
-                  <h1 className="card-title">Tech Blog</h1>
-                  <small className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolore, quod.
-                  </small>
-                </div>
-              </Link>
-            )}
+            <div className="card">
+              <div className="card-img-grid">
+                <Image
+                  src="/images/energy-website/Screenshot 2024-04-23 225337.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/energy-website/Screenshot 2024-04-23 225440.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/energy-website/Screenshot 2024-04-23 225401.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/energy-website/Screenshot 2024-04-23 225418.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+              </div>
+              <div className="card-body">
+                <h1 className="card-title">Tech Blog</h1>
+                <small className="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolore, quod.
+                </small>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-img-grid">
+                <Image
+                  src="/images/tech-blog/Screenshot 2024-04-23 223903.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/tech-blog/Screenshot 2024-04-23 223926.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/tech-blog/Screenshot 2024-04-23 224001.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="/images/tech-blog/Screenshot 2024-04-23 224029.png"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+              </div>
+              <div className="card-body">
+                <h1 className="card-title">Tech Blog</h1>
+                <small className="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolore, quod.
+                </small>
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-img-grid">
+                <Image
+                  src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+                <Image
+                  src="https://img.freepik.com/premium-photo/person-earns-money-with-laptop-blank-screen-finance-crypto-currency-illustration_123207-368.jpg?w=826"
+                  layout="fill"
+                  alt="Screenshot of the portfolio"
+                />
+              </div>
+              <div className="card-body">
+                <h1 className="card-title">Tech Blog</h1>
+                <small className="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolore, quod.
+                </small>
+              </div>
+            </div>
           </div>
         </div>
       </section>

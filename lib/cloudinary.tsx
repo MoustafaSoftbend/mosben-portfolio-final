@@ -37,27 +37,28 @@ type Accumulator = {
   [key: string]: Resource[];
 };
 
-export const handleGetCloudinaryUploads = async () => {
-  const resources = await cloudinary.search
-    .expression("resource_type:image")
-    .sort_by("created_at", "desc")
-    .max_results(500)
-    .execute();
+export const handleGetCloudinaryUploads = async (folderName = "Folder_0") => {
+  // const resources = await cloudinary.search
+  //   .expression(`${folderName} && resource_type:image`)
+  //   .sort_by("created_at", "desc")
+  //   .max_results(500)
+  //   .execute();
+  const resources = await cloudinary.api.sub_folders(folderName)
 
   // Use a type assertion to tell TypeScript about the type of resources.resources
-  const resourceArray = resources.resources as Resource[];
+  // const resourceArray = resources.resources as Resource[];
 
-  const groupedResources = resourceArray.reduce<Accumulator>(
-    (acc, resource) => {
-      const folderName = resource.folder;
-      if (!acc[folderName]) {
-        acc[folderName] = [];
-      }
-      acc[folderName].push(resource);
-      return acc;
-    },
-    {},
-  );
+  // const groupedResources = resourceArray.reduce<Accumulator>(
+  //   (acc, resource) => {
+  //     const folderName = resource.folder;
+  //     if (!acc[folderName]) {
+  //       acc[folderName] = [];
+  //     }
+  //     acc[folderName].push(resource);
+  //     return acc;
+  //   },
+  //   {},
+  // );
 
-  return groupedResources;
+  return resources;
 };

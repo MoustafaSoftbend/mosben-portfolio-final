@@ -3,27 +3,25 @@ import axios, { AxiosError } from "axios";
 export const screenshotsController = async (
   urls: string[],
   foldername = "default",
-): Promise<any[]> => {
-  const screens: any[] = [];
+) => {
+  let screens = {};
+  let response;
 
-  for (const url of urls) {
-    try {
-      const response = await get_screens(url);
-      if (response) {
-        // console.log(`Screens exist for ${url}:`, response);
-
-        screens.push(response);
-      } else {
-        const createdScreens = await createScreens(url, foldername);
-        // console.log(`Screens created for ${url}:`, createdScreens);
-        screens.push(createdScreens);
-      }
-    } catch (error) {
-      console.error(`Error processing ${url}:`, error);
+  try {
+    response = await get_screens();
+    if (response.status === 200) {
+      console.log(response);
+      screens = response.data;
+      return screens;
+    }
+  } catch (error) {
+    response = await createScreens(url, foldername);
+    if (response.status === 200) {
+      console.log(response);
+      screens = response.data;
+      return screens;
     }
   }
-  console.log(screens);
-
   return screens;
 };
 
@@ -42,14 +40,16 @@ const get_screens = async (url: string) => {
   }
 };
 
-const createScreens = async (url: string, foldername: string) => {
+const createScreens = async (urls: Array, foldername: string) => {
   try {
+    console.log(urls)
+
+
     const response = await axios.post("/api/images", {
-      url,
+      url: url,
       fullPage: true,
       foldername,
     });
-
     if (response.status === 200) {
       return response.data;
     } else {
