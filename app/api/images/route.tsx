@@ -121,7 +121,7 @@ const handlePostRequest = async (options: {
         const uploadResponse = await handleCloudinaryUpload({
           path: `public/screenshots/${screenshot}`,
           folder: true,
-          folderName: `${folderName}/${urlObject.hostname}`,
+          folderName: `portfolio-screenshots/${folderName}/${urlObject.hostname}`,
         });
         console.log(uploadResponse);
         await fs.unlink(`public/screenshots/${screenshot}`);
