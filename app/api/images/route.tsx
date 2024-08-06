@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const { url, fullPage } = await request.json();
-
+    console.log(url)
     // Check if the url variable is an array
     let results;
     if (Array.isArray(url)) {
@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
         url.map((screenshot, index) =>
           handlePostRequest({ url: screenshot, fullPage, index }),
         ),
+        console.log(results)
       );
     } else {
       // Handle single URL
@@ -54,7 +55,8 @@ export async function POST(request: NextRequest) {
 }
 
 const handleGetRequest = async () => {
-  const uploads = await handleGetCloudinaryUploads();
+  const folderName = "Folder_0"
+  const uploads = await handleGetCloudinaryUploads(folderName);
   return uploads;
 };
 
@@ -69,7 +71,7 @@ const handlePostRequest = async (options: {
 
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium-browser",
+    // executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium-browser",
   });
 
   const page = await browser.newPage();
