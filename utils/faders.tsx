@@ -1,65 +1,62 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-// Type definition for IntersectionObserver options
 interface IntersectionObserverOptions {
   root?: HTMLElement | null;
   rootMargin?: string;
-  threshold: number;
+  threshold?: number | number[];
 }
 
-// Reusable fade function with animation options
-const fade = (
+const useFade = (
   selector: string,
   initialOpacity: number = 0,
   initialTransform: string = "translateX(-100%)",
   animationDuration: number = 2000,
-  threshold: number = 0.5, // Adjust based on your needs
+  threshold: number = 0,
+  rootMargin: string = "0px 200px 0 200px",
 ) => {
-  const elements = useRef<HTMLElement[]>([]);
+  const elementsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const observerOptions: IntersectionObserverOptions = {
-      root: null, // Use viewport as root
-      threshold,
+      threshold: threshold,
     };
 
-    const intersection = (entries: IntersectionObserverEntry[]) => {
+    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
         if (entry.isIntersecting) {
-          if (entry.target instanceof HTMLElement) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateX(0%)";
-          }
-        } else {
-          if (entry.target instanceof HTMLElement) {
-            entry.target.style.opacity = initialOpacity.toString();
-            entry.target.style.transform = initialTransform;
-          }
+          // target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
+          target.style.opacity = "1";
+          target.style.transform = "translateX(0%)";
+          target.style.transform = "scale(1)";
         }
+        // else {
+        //   target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
+        //   target.style.opacity = initialOpacity.toString();
+        //   target.style.transform = initialTransform;
+        // }
       });
+      observer.unobserve();
     };
 
-    const observer = new IntersectionObserver(intersection, observerOptions);
+    const observer = new IntersectionObserver(
+      intersectionCallback,
+      observerOptions,
+    );
 
-    if (elements.current) {
-      elements.current.forEach((element) => observer.observe(element));
-    }
+    elementsRef.current.forEach((element) => {
+      observer.observe(element);
+    });
 
     return () => {
-      observer.disconnect(); // Clean up observer on unmount
+      observer.disconnect();
     };
-  }, [elements.current, threshold]); // Re-run effect when elements or threshold changes
+  }, [initialOpacity, initialTransform, animationDuration, threshold]);
 
   useEffect(() => {
     const selectedElements = document.querySelectorAll(selector);
-    elements.current = Array.from(selectedElements) as HTMLElement[];
-  }, [selector]); // Re-run effect when selector changes
-
-  return null; // No JSX return for utility function
+    elementsRef.current = Array.from(selectedElements) as HTMLElement[];
+  }, [selector]);
 };
 
-export const fade_left = () => fade(".fade-left");
-export const fade_right = () => fade(".fade-right", 0, "translateX(0)");
-export const fade_text_svg = () => {
-  fade(".orbit-svg-container h1.pivot-text", 0, "translateX(100%)", 2000, 0.75); // Adjust threshold as needed
-};
+export default useFade;

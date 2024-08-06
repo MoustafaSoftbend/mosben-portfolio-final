@@ -1,39 +1,41 @@
 import axios, { AxiosError } from "axios";
 
 export const screenshotsController = async (
-  url: string,
+  urls: string[],
   foldername = "default",
-) => {
-  let screens = {};
-  let response;
+): Promise<any[]> => {
+  const screens: any[] = [];
 
-  try {
-    response = await get_screens();
-    if (response.status === 200) {
-      console.log(response);
-      screens = response.data;
-      return screens;
-    }
-  } catch (error) {
-    response = await createScreens(url, foldername);
-    if (response.status === 200) {
-      console.log(response);
-      screens = response.data;
-      return screens;
+  for (const url of urls) {
+    try {
+      const response = await get_screens(url);
+      if (response) {
+        // console.log(`Screens exist for ${url}:`, response);
+
+        screens.push(response);
+      } else {
+        const createdScreens = await createScreens(url, foldername);
+        // console.log(`Screens created for ${url}:`, createdScreens);
+        screens.push(createdScreens);
+      }
+    } catch (error) {
+      console.error(`Error processing ${url}:`, error);
     }
   }
+  console.log(screens);
+
   return screens;
 };
 
-const get_screens = async () => {
+const get_screens = async (url: string) => {
   try {
-    const response = await axios.get("api/images");
+    const response = await axios.get("/api/images", { params: { url } });
     return response.data; // Assuming response.data contains the screens or an indication of existence
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
       if (axiosError.response && axiosError.response.status === 404) {
-        return false; // Screens do not exist
+        return null; // Screens do not exist
       }
     }
     throw error;
@@ -43,7 +45,7 @@ const get_screens = async () => {
 const createScreens = async (url: string, foldername: string) => {
   try {
     const response = await axios.post("/api/images", {
-      url: url,
+      url,
       fullPage: true,
       foldername,
     });
@@ -54,7 +56,7 @@ const createScreens = async (url: string, foldername: string) => {
       throw new Error("Failed to create screens");
     }
   } catch (error) {
-    console.error(error);
+    console.error("Error creating screens:", error);
     throw error;
   }
 };
