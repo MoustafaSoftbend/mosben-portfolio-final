@@ -151,9 +151,7 @@
 }
 
 .profile {
-  transition:
-    all 2s,
-    opacity 1s;
+  transition: all 2s, opacity 1s;
   transform: rotateY(180deg) translateX(100%);
   opacity: 0;
 }
@@ -257,7 +255,7 @@ nav .logo-container a {
   font-weight: 600;
 }
 
-.page-head .nav-footer>* {
+.page-head .nav-footer > * {
   margin-right: 1em;
 }
 
@@ -337,7 +335,7 @@ h1.section-title {
   padding: 1em;
 }
 
-.profile-buttons>* {
+.profile-buttons > * {
   margin-right: 1em;
 }
 
@@ -395,19 +393,19 @@ section.services-section .orbit-svg-container svg {
   transition: all 2s ease-in-out;
 }
 
-section.services-section .orbit-svg-container svg> :nth-child(11) {
+section.services-section .orbit-svg-container svg > :nth-child(11) {
   display: none;
 }
 
-section.services-section .orbit-svg-container svg> :nth-child(0),
-section.services-section .orbit-svg-container svg> :nth-child(1),
-section.services-section .orbit-svg-container svg> :nth-child(2),
-section.services-section .orbit-svg-container svg> :nth-child(3),
-section.services-section .orbit-svg-container svg> :nth-child(4),
-section.services-section .orbit-svg-container svg> :nth-child(5),
-section.services-section .orbit-svg-container svg> :nth-child(16),
-section.services-section .orbit-svg-container svg> :nth-child(17),
-section.services-section .orbit-svg-container svg>*:nth-child(n + 20) {
+section.services-section .orbit-svg-container svg > :nth-child(0),
+section.services-section .orbit-svg-container svg > :nth-child(1),
+section.services-section .orbit-svg-container svg > :nth-child(2),
+section.services-section .orbit-svg-container svg > :nth-child(3),
+section.services-section .orbit-svg-container svg > :nth-child(4),
+section.services-section .orbit-svg-container svg > :nth-child(5),
+section.services-section .orbit-svg-container svg > :nth-child(16),
+section.services-section .orbit-svg-container svg > :nth-child(17),
+section.services-section .orbit-svg-container svg > *:nth-child(n + 20) {
   animation: pulse-left 2s infinite;
 }
 
@@ -428,9 +426,15 @@ section.services-section .orbit-svg-container svg>*:nth-child(n + 20) {
   }
 }
 
-section.services-section .orbit-svg-container svg>*:nth-child(n + 6):nth-child(-n + 9),
-section.services-section .orbit-svg-container svg>*:nth-child(n + 13):nth-child(-n + 15),
-section.services-section .orbit-svg-container svg> :nth-child(n + 16) {
+section.services-section
+  .orbit-svg-container
+  svg
+  > *:nth-child(n + 6):nth-child(-n + 9),
+section.services-section
+  .orbit-svg-container
+  svg
+  > *:nth-child(n + 13):nth-child(-n + 15),
+section.services-section .orbit-svg-container svg > :nth-child(n + 16) {
   animation: pulse-right 2s infinite;
 }
 
@@ -451,8 +455,8 @@ section.services-section .orbit-svg-container svg> :nth-child(n + 16) {
   }
 }
 
-section.services-section .orbit-svg-container svg>*:nth-child(10),
-section.services-section .orbit-svg-container svg>*:nth-child(11) {
+section.services-section .orbit-svg-container svg > *:nth-child(10),
+section.services-section .orbit-svg-container svg > *:nth-child(11) {
   /* display: none; */
   animation: color 3s infinite;
 }
@@ -552,7 +556,11 @@ section.portfolio-section .carousel .carousel-container .card-img-grid div {
   align-items: center;
 }
 
-section.portfolio-section .carousel .carousel-container .card-img-grid div:first-of-type {
+section.portfolio-section
+  .carousel
+  .carousel-container
+  .card-img-grid
+  div:first-of-type {
   grid-column: span 3;
   grid-row: span 3;
   /* padding: 2.5em; */
@@ -567,21 +575,27 @@ section.portfolio-section .carousel .carousel-container .card img {
   padding: 0.2em;
 }
 
-section.portfolio-section .carousel .carousel-container .card-img-grid div.img-loader:first-of-type img {
+section.portfolio-section
+  .carousel
+  .carousel-container
+  .card-img-grid
+  div.img-loader:first-of-type
+  img {
   padding: 2em;
 }
 
-section.portfolio-section .carousel .carousel-container .card-img-grid div.img-loader {
+section.portfolio-section
+  .carousel
+  .carousel-container
+  .card-img-grid
+  div.img-loader {
   height: auto;
   /* padding-bottom: 2em; */
 }
 
-
-
 section.portfolio-section .carousel .carousel-container .card img.img-loader {
   height: auto !important;
   padding: 0.6em;
-
 }
 
 section.portfolio-section .carousel .carousel-container .card .card-body {
@@ -651,11 +665,13 @@ section.contact-section form.contact-form label {
   background-color: var(--color-grey);
   padding: 0.5em 1em;
   border-radius: 10px;
+  width: 100%;
 }
 
 section.contact-section form.contact-form label.message-label {
   height: 250px;
   padding-bottom: 2.5em;
+  width: 100%;
 }
 
 section.contact-section form.contact-form label .input-box {
@@ -691,6 +707,9 @@ section.contact-section form.contact-form textarea {
   width: 100%;
   /* padding: 0.8em; */
   outline: none;
+  position: absolute;
+  z-index: 3;
+  background: transparent;
 }
 
 section.contact-section form.contact-form textarea {
@@ -712,8 +731,16 @@ section.contact-section form.contact-form label .input-box span.error-span {
   font-weight: 600;
 }
 
-section.contact-section form.contact-form .input-box input:focus~span.label-span,
-section.contact-section form.contact-form .input-box input:not(:placeholder-shown)~span.label-span {
+section.contact-section
+  form.contact-form
+  .input-box
+  input:focus
+  ~ span.label-span,
+section.contact-section
+  form.contact-form
+  .input-box
+  input:not(:placeholder-shown)
+  ~ span.label-span {
   color: var(--color-green);
   font-size: 0.75em;
   transform: translateY(-14px);
@@ -722,8 +749,12 @@ section.contact-section form.contact-form .input-box input:not(:placeholder-show
   padding: 0 0.5em;
 }
 
-section.contact-section form.contact-form .input-box textarea:focus~span,
-section.contact-section form.contact-form .input-box textarea:not(:placeholder-shown)~span {
+section.contact-section form.contact-form .input-box textarea:focus ~ span,
+section.contact-section
+  form.contact-form
+  .input-box
+  textarea:not(:placeholder-shown)
+  ~ span {
   color: var(--color-green);
   /* font-size: 0.75em;
   transform: translateY(-14px); */
@@ -848,9 +879,11 @@ footer.footer-section .social-links .Social-logo {
     height: 100vh;
   }
 
-  .page-head .nav-content {}
+  .page-head .nav-content {
+  }
 
-  .page-head .nav-img-container {}
+  .page-head .nav-img-container {
+  }
 
   .page-head .nav-title {
     font-size: 2.3em;

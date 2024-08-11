@@ -2,19 +2,19 @@ import axios, { AxiosError } from "axios";
 
 export const screenshotsController = async (
   urls: string[],
-  foldername = "default",
+  foldername = "default"
 ): Promise<any[]> => {
   const screens: any[] = [];
 
   for (const url of urls) {
     try {
       const response = await get_screens(url);
-      if (response) {
+      if (response && response.length > 0) {
         // console.log(`Screens exist for ${url}:`, response);
 
         screens.push(response);
       } else {
-        const createdScreens = await createScreens(url, foldername);
+        const createdScreens = await createScreens(url);
         // console.log(`Screens created for ${url}:`, createdScreens);
         screens.push(createdScreens);
       }
@@ -49,6 +49,8 @@ const createScreens = async (url: string, foldername: string) => {
       fullPage: true,
       foldername,
     });
+
+    console.log(response);
 
     if (response.status === 200) {
       return response.data;

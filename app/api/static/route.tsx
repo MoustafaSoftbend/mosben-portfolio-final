@@ -17,10 +17,12 @@ interface UploadParams {
     folder: boolean;
 }
 
-const folder = '/static';
+const folder = 'static';
 export const GET = async (request: NextRequest) => {
     try {
-        const resposne = await handleGetStaticImages()
+        const resposne = await handleGetStaticImages(folder)
+        return NextResponse.json(resposne);
+
 
     } catch (error) {
         if (error instanceof Error) {
@@ -29,7 +31,7 @@ export const GET = async (request: NextRequest) => {
     }
 }
 
-const handleGetStaticImages = async () => {
+const handleGetStaticImages = async (folder: string = "static") => {
     const { resources } = await cloudinary.api.resources({
         type: 'upload',
         prefix: folder, // Only files in this folder will be returned

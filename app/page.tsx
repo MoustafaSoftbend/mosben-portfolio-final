@@ -57,7 +57,7 @@ const Home = () => {
     0,
     "translateX(100%)",
     2000,
-    0.75,
+    0.75
   );
   useFade(".orbit-svg-container svg");
 
@@ -86,21 +86,20 @@ const Home = () => {
     }
     console.log(urlsState);
     // const linkLength = urls.length;
-    // let screenShots = screenshotsController(urls);
+    let screenShots = screenshotsController(urls);
 
     if (
       urlsState.length > 0 &&
       screenShots.length == 0 &&
       urlsState.length != screenShots.length
     ) {
-      console.log(screenShots.length);
-      // fetchData(urlsState);
-      const intervalId = setInterval(fetchData(urlsState), 60000);
+      fetchData(urlsState);
+      // const intervalId = setInterval(fetchData(urlsState), 60000);
     }
     if (screenShots.length > 0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
       screenShots.forEach((screen, index) => {
-        console.log(screen[Object.keys(screen)[0]][0].secure_url);
+        console.log(screen[Object.keys(screen)]);
       });
     }
 
@@ -127,8 +126,8 @@ const Home = () => {
             <Lottie
               className="dev-animation"
               options={defaultOptions}
-            // height={"auto"}
-            // width={"100%"}
+              // height={"auto"}
+              // width={"100%"}
             />
           </div>
           <div className="nav-body">
@@ -335,15 +334,19 @@ const Home = () => {
           />
           <div className="carousel-container">
             {screenShots && screenShots.length > 0 ? (
-              screenShots.map((screen, index) =>
-                <Link href=
-                  {urlsState && urlsState.length > 0 ? urlsState[0] : '/'} className="card">
+              screenShots.map((screen, index) => (
+                <Link
+                  href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
+                  className="card"
+                >
                   <div className="card-img-grid">
                     <div>
                       <Image
                         src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][0].url
+                          screen &&
+                          Object.keys(screen).length > 0 &&
+                          screen[Object.keys(screen)[0]][0]
+                            ? screen[Object.keys(screen)[0]][0].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -353,8 +356,10 @@ const Home = () => {
                     <div>
                       <Image
                         src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][1].url
+                          screen &&
+                          Object.keys(screen).length > 0 &&
+                          screen[Object.keys(screen)[0]][1]
+                            ? screen[Object.keys(screen)[0]][1].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -364,8 +369,10 @@ const Home = () => {
                     <div>
                       <Image
                         src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][2].url
+                          screen &&
+                          Object.keys(screen).length > 0 &&
+                          screen[Object.keys(screen)[0]][2]
+                            ? screen[Object.keys(screen)[0]][2].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -375,15 +382,16 @@ const Home = () => {
                     <div>
                       <Image
                         src={
-                          screen && Object.keys(screen).length > 0
-                            ? screen[Object.keys(screen)[0]][3].url
+                          screen &&
+                          Object.keys(screen).length > 0 &&
+                          screen[Object.keys(screen)[0]][3]
+                            ? screen[Object.keys(screen)[0]][3].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
                         alt="Screenshot of the portfolio"
                       />
                     </div>
-
                   </div>
                   <div className="card-body">
                     <h1 className="card-title">Tech Blog</h1>
@@ -393,7 +401,7 @@ const Home = () => {
                     </small>
                   </div>
                 </Link>
-              )
+              ))
             ) : (
               <Link href="/" className="card">
                 <div className="card-img-grid">

@@ -17,7 +17,7 @@ interface UploadParams {
 
 export const handleCloudinaryUpload = async ({
   path,
-  folderName = "/portfolio-screenshots",
+  folderName = "Folder_0",
 }: UploadParams) => {
   const result = await cloudinary.uploader.upload(path, {
     folder: folderName,
@@ -37,9 +37,10 @@ type Accumulator = {
   [key: string]: Resource[];
 };
 
-export const handleGetCloudinaryUploads = async () => {
+export const handleGetCloudinaryUploads = async (folder: string = "Screens") => {
+
   const resources = await cloudinary.search
-    .expression("resource_type:image")
+    .expression(`folder:${folder} && resource_type:image`)
     .sort_by("created_at", "desc")
     .max_results(500)
     .execute();
@@ -61,3 +62,10 @@ export const handleGetCloudinaryUploads = async () => {
 
   return groupedResources;
 };
+
+export const handleFolderCall = async () => {
+  const result = await cloudinary.api.sub_folders('Screens', { max_results: 500 });
+  console.log(result)
+
+  return result
+}
