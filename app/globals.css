@@ -657,6 +657,9 @@ section.contact-section form.contact-form {
   padding: 1em;
   display: grid;
 }
+section.contact-section form.contact-form .form-body{
+  padding-right: 1.5em;
+}
 
 section.contact-section form.contact-form label {
   margin: 1em;

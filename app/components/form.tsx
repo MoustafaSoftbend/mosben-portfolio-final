@@ -69,7 +69,7 @@ const Form = () => {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="min-[500px]:flex min-[500px]:flex-row">
+      <div className="form-body min-[500px]:flex min-[500px]:flex-row pr-[3]">
         <label
           className={errors.firstName ? "red-shadow" : ""}
           htmlFor="first-name"
@@ -101,7 +101,7 @@ const Form = () => {
           </div>
         </label>
       </div>
-
+      <div className="form-body">
       <label htmlFor="email">
         <FontAwesomeIcon className="icon" icon={faEnvelope} />
         <div className="input-box">
@@ -134,6 +134,8 @@ const Form = () => {
           )}
         </div>
       </label>
+      </div>
+
       <button
         className="btn btn-primary"
         type="submit"

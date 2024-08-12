@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       );
     } else {
       // Handle single URL
-      results = await handlePostRequest({ url, fullPage });
+      results = await handlePostRequest({ url, fullPage, folderName });
     }
     return NextResponse.json(results);
   } catch (error) {
