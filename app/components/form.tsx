@@ -52,9 +52,11 @@ const Form = () => {
     // const response = await sendData({firstName, lastName, email,message})
   };
 
+  const input = useRef<NodeListOf<HTMLInputElement | HTMLTextAreaElement>>();
+
   useEffect(() => {
-    input = document.querySelectorAll(".contact-form .input-box input, .contact-form .input-box textarea");
-    input.forEach((inputField) => {
+    input.current = document.querySelectorAll(".contact-form .input-box input, .contact-form .input-box textarea");
+    input.current.forEach((inputField) => {
       inputField.addEventListener("focus", () => {
         if ((inputField as HTMLInputElement).value.trim() !== "" && errors.length == 0) {
           document.documentElement.style.setProperty(
@@ -102,6 +104,7 @@ const Form = () => {
       document.documentElement.style.setProperty("--animation-color", "orange");
     }
   }, [input, errors]);
+  
 
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
