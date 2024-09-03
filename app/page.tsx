@@ -35,6 +35,7 @@ import { useEffect, useState } from "react";
 import Server_svg from "../public/images/server_svg.svg";
 
 import { screenshotsController } from "./controller/screenshotsController";
+import {getStaticController} from "./controller/getStaticController"
 
 const Home = () => {
   const defaultOptions = {
@@ -48,6 +49,14 @@ const Home = () => {
 
   const [screenShots, setScreenShots] = useState([]);
   const [urlsState, setUrlsState] = useState([]);
+  const [staticData, setStaticData] = useState({});
+
+  const updateStaticData = (key, value) => {
+    setStaticData(prevState => ({
+      ...prevState,
+      [key]: value // Using computed property names to set the value
+    }));
+  };
 
   scroller();
   useFade(".fade_left", 0, "translateX(0)");
@@ -69,6 +78,7 @@ const Home = () => {
     const fetchData = async (urls: string[]) => {
       try {
         const screens = await screenshotsController(urls);
+        console.log(screens)
         if (Array.isArray(screens)) {
           setScreenShots(screens);
         }
@@ -76,17 +86,46 @@ const Home = () => {
         console.error("Error fetching screenshots:", error);
       }
     };
+
+    const fetchStatic = async () =>{
+      try {
+        const stat:any[] = await getStaticController()
+        // console.log(stat)
+        if (Array.isArray(stat)){
+          stat.map((el,index) =>{
+            // console.log(el.folder,el.secure_url)
+            updateStaticData(el.folder,el.secure_url)
+          })
+        // console.log(Object.keys(staticData).length)
+        }
+      }catch (error){
+        console.error("Error fetching screenshots:", error);
+
+      }
+    }
+    console.log(staticData["static/band"])
+
+    // console.log(staticData)
+
+    // console.log(staticData)
+
     // const urls = Array.from(document.querySelectorAll("a.card")).map(
     //   (a) => a.href,
     // );
 
-    const urls = ["https://7kwlxf-3000.csb.app/"];
-    if (urlsState.length == 0) {
-      setUrlsState(["https://7kwlxf-3000.csb.app/"]);
+    const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
+    if (urlsState.length <= 0) {
+      setUrlsState(["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"]);
     }
-    console.log(urlsState);
+    // console.log(urlsState);
     // const linkLength = urls.length;
-    let screenShots = screenshotsController(urls);
+    // let screenShots = screenshotsController(urls);
+
+    console.log(
+      urlsState.length > 0,
+      screenShots.length == 0 ,
+      urlsState.length != screenShots.length
+    )
 
     if (
       urlsState.length > 0 &&
@@ -107,13 +146,17 @@ const Home = () => {
     // let screenShots = screenshotsController("https://7kwlxf-3000.csb.app/");
     // Set up an interval to fetch data periodically
     //   const intervalId = setInterval(fetchData, 2000); // Fetch data every 5 seconds
-  }, [screenShots, urlsState]);
+    if (Object.keys(staticData).length <= 0){
+      fetchStatic()
+    }
+
+  }, [screenShots, urlsState,staticData]);
   return (
     <>
       <header className="page-head intersect">
         <div className="slider-band absolute w-[50%] top-0 left-0 h-fit">
           <Image
-            src="/images/band.png"
+            src={staticData && staticData['static/band']? staticData['static/band'] :"/images/band.png"}
             layout="fill"
             className="silder-band"
             alt="Band image"
@@ -271,7 +314,7 @@ const Home = () => {
               <div className="profile-overlay"></div>
               <div className="profile-picture profile">
                 <Image
-                  src="/images/profile.jpg"
+                  src={staticData && staticData['static/profile']? staticData['static/profile'] :"/images/profile.jpg"}
                   layout="fill"
                   alt="Profile pic"
                 />
@@ -460,7 +503,8 @@ const Home = () => {
           </div>
           <div className="contact-body">
             <div className="contact-container">
-              <div className="server-svg-container m-[0 auto]">
+              <div className="server-svg-container m-[0 auto] relative">
+                <span className="warning-form-data">warning fix the errors</span>
                 <Server_svg />
               </div>
               <h1 className="contact-logo-title p-3">

@@ -141,12 +141,12 @@
 }
 
 .fade-left {
-  transform: translateX(-50%);
+  transform: translateX(-25%);
   opacity: 0;
 }
 
 .fade_right {
-  transform: translateX(50%);
+  transform: translateX(25%);
   opacity: 0;
 }
 
@@ -373,13 +373,13 @@ section.services-section .orbit-svg-container {
 }
 
 .pivot-text-left {
-  transform: translateX(-120%);
+  transform: translateX(-80%);
   opacity: 0;
 }
 
 .pivot-text-right {
   right: 0;
-  transform: translateX(120%);
+  transform: translateX(80%);
   opacity: 0;
 }
 
@@ -619,6 +619,14 @@ section.contact-section .contact-container {
   /* border-radius: 20px; */
 }
 
+section.contact-section .contact-container .server-svg-container span.warning-form-data {
+  /* content: "warning fix the errors"; */
+  position: absolute;
+  top: 0;
+  right: 5%;
+  font-size: 1em;
+  font-weight: 700;
+}
 section.contact-section .contact-container img {
   padding: 1em;
 }
@@ -725,10 +733,11 @@ section.contact-section form.contact-form .input-box input::placeholder {
   color: transparent;
 }
 
-section.contact-section form.contact-form label .input-box span.error-span {
+section.contact-section form.contact-form label .input-box span.error-span,
+section.contact-section form.contact-form label .input-box textarea  span.error-span {
   color: red;
   position: absolute;
-  left: 65px;
+  left: 100px;
   top: -25px;
   font-size: 0.7em;
   font-weight: 600;
@@ -752,18 +761,19 @@ section.contact-section
   padding: 0 0.5em;
 }
 
-section.contact-section form.contact-form .input-box textarea:focus ~ span,
+section.contact-section form.contact-form .input-box textarea:focus ~ span:first-of-type,
 section.contact-section
   form.contact-form
   .input-box
   textarea:not(:placeholder-shown)
-  ~ span {
+  ~ span:first-of-type {
   color: var(--color-green);
   /* font-size: 0.75em;
   transform: translateY(-14px); */
   background-color: var(--color-grey);
   padding: 0 0.5em;
 }
+
 
 /* section.contact-section
   form.contact-form

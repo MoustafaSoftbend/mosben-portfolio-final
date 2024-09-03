@@ -3,6 +3,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 
+import {sendEmail} from "../controller/sendMailer"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -26,38 +28,72 @@ const Form = () => {
     formState: { errors },
   } = useForm<FormData>();
 
+  const sendData = async (data: string[]) => {
+    try {
+      const emal = await sendEmail(data);
+      
+    } catch (error) {
+      console.error("Error fetching screenshots:", error);
+    }
+  };
+
+  let input
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+    if (Object.keys(data).length > 0) {
+    console.log(Object.keys(data).length);
+
+      document.documentElement.style.setProperty(
+        "--animation-color",
+        "red",
+      );
+    } 
     // Send data to backend or do whatever you want
+    const {firstName, lastName, email,message} = data
+    // const response = await sendData({firstName, lastName, email,message})
   };
 
   useEffect(() => {
-    const input = document.querySelectorAll(".contact-form .input-box input");
+    input = document.querySelectorAll(".contact-form .input-box input, .contact-form .input-box textarea");
     input.forEach((inputField) => {
       inputField.addEventListener("focus", () => {
-        if ((inputField as HTMLInputElement).value.trim() !== "") {
-          document.documentElement.style.setProperty(
-            "--animation-color",
-            "#03c7ad",
-          );
-        } else {
+        if ((inputField as HTMLInputElement).value.trim() !== "" && errors.length == 0) {
           document.documentElement.style.setProperty(
             "--animation-color",
             "orange",
           );
+        } else {
+          document.documentElement.style.setProperty(
+            "--animation-color",
+            "red",
+          );
         }
       });
-
+      
       // Add event listener for input
       inputField.addEventListener("input", () => {
-        if ((inputField as HTMLInputElement).value.trim() !== "") {
           document.documentElement.style.setProperty(
             "--animation-color",
             "#03c7ad",
           );
+      });
+
+
+      inputField.addEventListener("blur", () => {
+        if ((inputField as HTMLInputElement).value.trim() !== "" && errors.length > 0) {
+          document.documentElement.style.setProperty(
+            "--animation-color",
+            "red",
+          );
+        // } else {
+        //   document.documentElement.style.setProperty(
+        //     "--animation-color",
+        //     "orange",
+        //   );
         }
       });
     });
+
+
 
     if (Object.keys(errors).length > 0) {
       console.log(Object.keys(errors).length);
@@ -65,7 +101,7 @@ const Form = () => {
     } else {
       document.documentElement.style.setProperty("--animation-color", "orange");
     }
-  }, [errors]);
+  }, [input, errors]);
 
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
@@ -78,7 +114,21 @@ const Form = () => {
           <div className="input-box">
             <input
               placeholder="First Name"
-              {...register("firstName", { required: "First Name is required" })}
+              {...register("firstName", {
+                required: "First Name is required",
+                minLength: {
+                  value: 2,
+                  message: "At least 2 characters long",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "cannot exceed 30 characters",
+                },
+                pattern: {
+                  value: /^[A-Za-z]+$/,
+                  message: "Only contain alphabetic characters",
+                },
+              })}
             />
             {errors.firstName && (
               <span className="error-span">{errors.firstName.message}</span>
@@ -91,7 +141,21 @@ const Form = () => {
           <FontAwesomeIcon className="icon" icon={faUsers} />
           <div className="input-box">
             <input
-              {...register("lastName", { required: "Last Name is required" })}
+              {...register("lastName", {
+                required: "Last Name is required",
+                minLength: {
+                  value: 2,
+                  message: "Last Name must be at least 2 characters long",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Last Name cannot exceed 30 characters",
+                },
+                pattern: {
+                  value: /^[A-Za-z]+$/,
+                  message: "Last Name can only contain alphabetic characters",
+                },
+              })}
               placeholder="Last Name"
             />
             {errors.lastName && (
@@ -126,7 +190,13 @@ const Form = () => {
         <div className="input-box">
           <textarea
             placeholder="Write message here..."
-            {...register("message", { required: "Message is required" })}
+            {...register("message", {
+              required: "Message is required",
+              minLength: {
+                value: 10,
+                message: "Message must be at least 10 characters long",
+              },
+            })}
           />
           <span className="message-label">Message</span>
           {errors.message && (

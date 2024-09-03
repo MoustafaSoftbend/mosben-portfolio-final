@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const uploads = await handleGetRequest();
+    console.log(uploads)
     return NextResponse.json(uploads);
   } catch (error) {
     if (error instanceof Error) {
@@ -34,6 +35,7 @@ export async function POST(request: NextRequest) {
 
     // Check if the url variable is an array
     let results;
+    console.log(url)
     if (Array.isArray(url)) {
       // Handle multiple URLs
 

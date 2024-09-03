@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 cloudinary.config({
-  cloud_name: process.env.cloud_name,
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 
@@ -22,6 +22,7 @@ export const handleCloudinaryUpload = async ({
 }: UploadParams) => {
   const result = await cloudinary.uploader.upload(path, {
     folder: folderName,
+    overwrite: true,
     public_id: `${Date.now()}_${Math.floor(Math.random() * 1000)}`,
   });
   return result;
@@ -39,9 +40,10 @@ type Accumulator = {
 };
 
 export const handleGetCloudinaryUploads = async (folder: string = "Screens") => {
+  console.log(folder)
 
   const resources = await cloudinary.search
-    .expression(`folder:${folder} && resource_type:image`)
+    .expression(`folder:${folder}* AND resource_type:image`)
     .sort_by("created_at", "desc")
     .max_results(500)
     .execute();
@@ -60,7 +62,7 @@ export const handleGetCloudinaryUploads = async (folder: string = "Screens") => 
     },
     {},
   );
-
+  console.log(resources)
   return groupedResources;
 };
 

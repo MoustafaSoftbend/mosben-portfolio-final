@@ -2,35 +2,36 @@ import axios, { AxiosError } from "axios";
 
 export const screenshotsController = async (
   urls: string[],
-  foldername = "default"
 ): Promise<any[]> => {
   const screens: any[] = [];
 
   for (const url of urls) {
+    console.log(url)
     try {
-      const response = await get_screens(url);
-      if (response && response.length > 0) {
-        // console.log(`Screens exist for ${url}:`, response);
-
-        screens.push(response);
+      const existingScreens = await get_screens();
+      // Ensure that existingScreens is checked properly
+      if (existingScreens) {
+        console.log(existingScreens)
+        console.log(`Screens exist for ${url}:`, existingScreens);
+        screens.push(existingScreens);
       } else {
-        const createdScreens = await createScreens(url);
-        // console.log(`Screens created for ${url}:`, createdScreens);
+        // If no existing screens, create new ones
+        const createdScreens = await createScreens(url); // Make sure foldername is passed
+        console.log(`Screens created for ${url}:`, createdScreens);
         screens.push(createdScreens);
       }
     } catch (error) {
       console.error(`Error processing ${url}:`, error);
     }
   }
-  console.log(screens);
-
+console.log(screens)
   return screens;
 };
 
 const get_screens = async (url: string) => {
   try {
-    const response = await axios.get("/api/images", { params: { url } });
-    return response.data; // Assuming response.data contains the screens or an indication of existence
+    const response = await axios.get("/api/images");
+    return response.data; // Assuming response.data contains the screens or null/empty array
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
@@ -38,7 +39,7 @@ const get_screens = async (url: string) => {
         return null; // Screens do not exist
       }
     }
-    throw error;
+    throw error; // Rethrow error for unexpected cases
   }
 };
 
@@ -50,10 +51,8 @@ const createScreens = async (url: string, foldername: string) => {
       foldername,
     });
 
-    console.log(response);
-
     if (response.status === 200) {
-      return response.data;
+      return response.data; // Assume response.data contains the created screens
     } else {
       throw new Error("Failed to create screens");
     }
