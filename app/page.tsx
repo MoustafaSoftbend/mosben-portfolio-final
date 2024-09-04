@@ -138,7 +138,7 @@ const Home = () => {
     if (screenShots.length > 0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
       screenShots.forEach((screen, index) => {
-        console.log(screen[Object.keys(screen)]);
+        console.log(key={index}>screen[Object.keys(screen)]);
       });
     }
 
