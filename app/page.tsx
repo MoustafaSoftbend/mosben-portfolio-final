@@ -94,7 +94,7 @@ const Home = () => {
         if (Array.isArray(stat)){
           stat.map((el,index) =>{
             // console.log(el.folder,el.secure_url)
-            updateStaticData(el.folder,el.secure_url)
+            updateStaticData(key={index}>el.folder,el.secure_url)
           })
         // console.log(Object.keys(staticData).length)
         }
