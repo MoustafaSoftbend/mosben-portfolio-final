@@ -385,7 +385,7 @@ const Home = () => {
                 >
                   <div className="card-img-grid">
                     <div>
-                      <Image
+                      <Image key={item.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -398,7 +398,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image
+                      <Image key={item.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -411,7 +411,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image
+                      <Image key={item.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -424,7 +424,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image
+                      <Image key={item.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
