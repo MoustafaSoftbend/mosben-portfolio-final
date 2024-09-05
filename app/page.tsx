@@ -377,7 +377,7 @@ const Home = () => {
           />
           <div className="carousel-container">
             {screenShots && screenShots.length > 0 ? (
-              screenShots.map((screen, index) => (
+              screenShots.map((screen) => (
                 <Link
                   href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
                   className="card"
