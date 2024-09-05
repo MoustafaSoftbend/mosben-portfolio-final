@@ -94,7 +94,7 @@ const Home = () => {
         if (Array.isArray(stat)){
           stat.map((el,index) =>{
             // console.log(el.folder,el.secure_url)
-            updateStaticData(key={index}>el.folder,el.secure_url)
+            updateStaticData(el.folder,el.secure_url)
           })
         // console.log(Object.keys(staticData).length)
         }
@@ -381,6 +381,7 @@ const Home = () => {
                 <Link
                   href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
                   className="card"
+                  key={item.id || index}
                 >
                   <div className="card-img-grid">
                     <div>
