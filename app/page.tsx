@@ -74,9 +74,13 @@ const Home = () => {
     uploaded_by: string;
   }
 
+  interface StaticData {
+    [key: string]: string;
+  }
+
   const [screenShots, setScreenShots] = useState<Screen[]>([]);
   const [urlsState, setUrlsState] = useState<string[]>([]);
-  const [staticData, setStaticData] = useState({});
+  const [staticData, setStaticData] = useState<StaticData | null>(null);
 
   const updateStaticData = (key:string, value: any) => {
     setStaticData(prevState => ({
