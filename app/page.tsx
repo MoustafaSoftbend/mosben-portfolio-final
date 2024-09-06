@@ -51,7 +51,7 @@ const Home = () => {
   const [urlsState, setUrlsState] = useState([]);
   const [staticData, setStaticData] = useState({});
 
-  const updateStaticData = (key, value) => {
+  const updateStaticData = (key:string, value: any) => {
     setStaticData(prevState => ({
       ...prevState,
       [key]: value // Using computed property names to set the value
@@ -103,7 +103,7 @@ const Home = () => {
 
       }
     }
-    console.log(staticData["static/band"])
+    // console.log(staticData["static/band"])
 
     // console.log(staticData)
 
@@ -113,7 +113,7 @@ const Home = () => {
     //   (a) => a.href,
     // );
 
-    const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
+    // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
       setUrlsState(["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"]);
     }
@@ -137,9 +137,9 @@ const Home = () => {
     }
     if (screenShots.length > 0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
-      screenShots.forEach((screen, index) => {
-        console.log(key={index}>screen[Object.keys(screen)]);
-      });
+      // screenShots.forEach((screen, index) => {
+      //   console.log(key={index}>screen[Object.keys(screen)]);
+      // });
     }
 
     // links.forEach((link) => {});
