@@ -177,7 +177,7 @@ const Home = () => {
     // let screenShots = screenshotsController("https://7kwlxf-3000.csb.app/");
     // Set up an interval to fetch data periodically
     //   const intervalId = setInterval(fetchData, 2000); // Fetch data every 5 seconds
-    if (Object.keys(staticData).length <= 0){
+    if (staticData && Object.keys(staticData).length <= 0){
       fetchStatic()
     }
 
