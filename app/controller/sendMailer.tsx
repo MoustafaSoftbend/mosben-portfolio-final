@@ -1,6 +1,6 @@
 // Example form submission handler in a component
 
-export const sendEmail = async () => {
+export const sendEmail = async (data: string[]) => {
     const res = await fetch("/api/sendMail", {
       method: "POST",
       headers: {
