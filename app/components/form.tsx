@@ -58,7 +58,7 @@ const Form = () => {
     inputRef.current = document.querySelectorAll(".contact-form .input-box input, .contact-form .input-box textarea");
     inputRef.current.forEach((inputField) => {
       inputField.addEventListener("focus", () => {
-        if ((inputField as HTMLInputElement).value.trim() !== "" && errors.length == 0) {
+        if ((inputField as HTMLInputElement).value.trim() !== "" && Object.keys(errors).length === 0) {
           document.documentElement.style.setProperty(
             "--animation-color",
             "orange",
@@ -81,7 +81,7 @@ const Form = () => {
 
 
       inputField.addEventListener("blur", () => {
-        if ((inputField as HTMLInputElement).value.trim() !== "" && errors.length > 0) {
+        if ((inputField as HTMLInputElement).value.trim() !== "" && Object.keys(errors).length === 0) {
           document.documentElement.style.setProperty(
             "--animation-color",
             "red",
