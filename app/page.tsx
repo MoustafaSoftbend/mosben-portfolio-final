@@ -26,7 +26,7 @@ import Link from "next/link";
 
 import { scroller } from "../utils/scroller";
 
-import { fade_left, fade_right, fade_text_svg } from "../utils/faders";
+// import { fade_left, fade_right, fade_text_svg } from "../utils/faders";
 import useFade from "../utils/faders";
 import { typer } from "../utils/typer";
 import { cardRotation } from "../utils/cardRotation";
