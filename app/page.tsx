@@ -75,7 +75,7 @@ const Home = () => {
   }
 
   const [screenShots, setScreenShots] = useState<Screen[]>([]);
-  const [urlsState, setUrlsState] = useState([]);
+  const [urlsState, setUrlsState] = useState<string[]>([]);
   const [staticData, setStaticData] = useState({});
 
   const updateStaticData = (key:string, value: any) => {
