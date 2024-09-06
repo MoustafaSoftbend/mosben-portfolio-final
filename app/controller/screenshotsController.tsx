@@ -28,7 +28,7 @@ console.log(screens)
   return screens;
 };
 
-const get_screens = async (url: string) => {
+const get_screens = async () => {
   try {
     const response = await axios.get("/api/images");
     return response.data; // Assuming response.data contains the screens or null/empty array
@@ -43,12 +43,12 @@ const get_screens = async (url: string) => {
   }
 };
 
-const createScreens = async (url: string, foldername: string) => {
+const createScreens = async (url: string) => {
   try {
     const response = await axios.post("/api/images", {
       url,
       fullPage: true,
-      foldername,
+      // foldername,
     });
 
     if (response.status === 200) {
