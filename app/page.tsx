@@ -47,7 +47,34 @@ const Home = () => {
     },
   };
 
-  const [screenShots, setScreenShots] = useState([]);
+  interface Screen {
+    asset_id: string;
+    public_id: string;
+    folder: string;
+    filename: string;
+    format: string;
+    version: number;
+    resource_type: string;
+    type: string;
+    created_at: string;
+    uploaded_at: string;
+    bytes: number;
+    width: number;
+    height: number;
+    aspect_ratio: number;
+    pixels: number;
+    url: string;
+    secure_url: string;
+    status: string;
+    access_mode: string;
+    access_control: null;
+    etag: string;
+    created_by: string;
+    access_key: string;
+    uploaded_by: string;
+  }
+
+  const [screenShots, setScreenShots] = useState<Screen[]>([]);
   const [urlsState, setUrlsState] = useState([]);
   const [staticData, setStaticData] = useState({});
 
