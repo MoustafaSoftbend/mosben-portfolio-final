@@ -408,15 +408,15 @@ const Home = () => {
           />
           <div className="carousel-container">
             {screenShots && screenShots.length > 0 ? (
-              screenShots.map((screen) => (
+              screenShots.map((screen,index) => (
                 <Link
                   href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
                   className="card"
-                  key={item.id || index}
+                  key={screen.id || index}
                 >
                   <div className="card-img-grid">
                     <div>
-                      <Image key={item.id || index}
+                      <Image key={screen.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -429,7 +429,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={item.id || index}
+                      <Image key={screen.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -442,7 +442,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={item.id || index}
+                      <Image key={screen.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -455,7 +455,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={item.id || index}
+                      <Image key={screen.id || index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
