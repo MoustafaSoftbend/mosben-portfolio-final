@@ -412,11 +412,11 @@ const Home = () => {
                 <Link
                   href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
                   className="card"
-                  key={screen.id || index}
+                  key={index}
                 >
                   <div className="card-img-grid">
                     <div>
-                      <Image key={screen.id || index}
+                      <Image key={index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -429,7 +429,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={screen.id || index}
+                      <Image key={index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -442,7 +442,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={screen.id || index}
+                      <Image key={index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
@@ -455,7 +455,7 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <Image key={screen.id || index}
+                      <Image key={index}
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
