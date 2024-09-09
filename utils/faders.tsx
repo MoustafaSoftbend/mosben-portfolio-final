@@ -29,6 +29,9 @@ const useFade = (
           target.style.opacity = "1";
           target.style.transform = "translateX(0%)";
           target.style.transform = "scale(1)";
+
+          observer.unobserve(target);
+
         }
         // else {
         //   target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
@@ -37,7 +40,6 @@ const useFade = (
         // }
       });
       
-      observer.unobserve(target);
 
     };
 
