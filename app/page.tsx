@@ -89,8 +89,6 @@ const Home = () => {
       [key]: value // Using computed property names to set the value
     }));
   };
-
-  scroller();
   useFade(".fade_left", 0, "translateX(0)");
   useFade(".fade_right", 0, "translateX(0)");
   useFade(
@@ -105,6 +103,9 @@ const Home = () => {
   // typer();
 
   useEffect(() => {
+    scroller();
+
+  
     cardRotation();
     // fade_text_svg();
     const fetchData = async (urls: string[]) => {
