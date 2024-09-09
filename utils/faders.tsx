@@ -36,8 +36,11 @@ const useFade = (
         //   target.style.transform = initialTransform;
         // }
       });
-      observer.unobserve();
+      observer.unobserve(target);
+
     };
+
+
 
     const observer = new IntersectionObserver(
       intersectionCallback,
