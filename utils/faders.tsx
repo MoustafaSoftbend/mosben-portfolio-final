@@ -36,6 +36,7 @@ const useFade = (
         //   target.style.transform = initialTransform;
         // }
       });
+      
       observer.unobserve(target);
 
     };
