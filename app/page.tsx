@@ -102,7 +102,7 @@ const Home = () => {
   );
   useFade(".orbit-svg-container svg");
 
-  typer();
+  // typer();
 
   useEffect(() => {
     cardRotation();
