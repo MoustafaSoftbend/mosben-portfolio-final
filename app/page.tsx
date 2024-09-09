@@ -100,11 +100,11 @@ const Home = () => {
   );
   useFade(".orbit-svg-container svg");
 
-  // typer();
 
   useEffect(() => {
     scroller();
 
+    typer();
   
     cardRotation();
     // fade_text_svg();
