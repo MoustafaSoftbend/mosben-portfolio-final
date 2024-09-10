@@ -1,4 +1,3 @@
-"use client"
 export const cardRotation = () => {
   const cards = document.querySelectorAll<HTMLElement>(".profile");
 

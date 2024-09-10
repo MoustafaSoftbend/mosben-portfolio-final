@@ -1,4 +1,3 @@
-"use client"
 
 export const scroller = () => {
   const carousel = document.querySelector<HTMLElement>(".carousel-container");
