@@ -1,3 +1,4 @@
+"use server";
 import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 
