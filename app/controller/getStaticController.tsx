@@ -1,3 +1,5 @@
+"use server";
+
 import axios from "axios"
 
 export const getStaticController = async () :Promise<any[]> =>{
