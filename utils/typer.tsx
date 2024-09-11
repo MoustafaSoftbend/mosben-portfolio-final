@@ -1,4 +1,4 @@
-
+"use client"
 import { useEffect, useRef } from "react"; // Assuming React integration
 
 // Type definition for a typed character element
