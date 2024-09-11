@@ -221,7 +221,7 @@ nav .logo-container a {
 }
 
 .page-head .nav-title span.typed-char {
-  display: none;
+  /* display: none; */
   /* opacity: 0; */
   transition: all 1s;
 }

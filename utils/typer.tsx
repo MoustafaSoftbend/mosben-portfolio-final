@@ -1,16 +1,16 @@
-import { useEffect, useRef } from "react"; // Assuming React integration
+import { useEffect, useRef } from "react";
 
 // Type definition for a typed character element
 interface TypedCharacter extends HTMLElement {
   textContent: string; // Restrict content to single character
 }
 
-export const typer = () => {
-  const charListRef = useRef<TypedCharacter[]>([]); // Initialize with an empty array
+// Custom hook to handle typing animation or logic
+export const Typer = () => {
+  const charListRef = useRef<TypedCharacter[]>([]);
 
-  useEffect(() => {
     const nodeList = document.querySelectorAll(
-      ".nav-body h1.nav-title span.typed-char",
+      ".nav-body h1.nav-title span.typed-char"
     );
     const charList = Array.from(nodeList) as TypedCharacter[]; // Convert NodeList to array and assert type
 
@@ -23,10 +23,4 @@ export const typer = () => {
     // Potential animation or dynamic typing logic here
     // ...
 
-    return () => {
-      // Cleanup logic if needed (e.g., animation cleanup)
-    };
-  }, []); // Empty dependency array for initial effect only
-
-  return null; // No JSX return for utility function
 };

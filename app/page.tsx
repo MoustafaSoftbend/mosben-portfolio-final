@@ -27,7 +27,7 @@ import { scroller } from "../utils/scroller";
 
 // import { fade_left, fade_right, fade_text_svg } from "../utils/faders";
 import useFade from "../utils/faders";
-import { typer } from "../utils/typer";
+import { Typer } from "../utils/typer";
 import { cardRotation } from "../utils/cardRotation";
 import { useEffect, useState } from "react";
 
@@ -102,8 +102,7 @@ const Home = () => {
 
   useEffect(() => {
     scroller();
-
-    typer();
+    // Typer();
   
     cardRotation();
     // fade_text_svg();
