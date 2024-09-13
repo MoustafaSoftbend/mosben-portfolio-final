@@ -59,10 +59,8 @@ const useFade = (
     };
   }, [initialOpacity, initialTransform, animationDuration, threshold]);
 
-  useEffect(() => {
     const selectedElements = document.querySelectorAll(selector);
     elementsRef.current = Array.from(selectedElements) as HTMLElement[];
-  }, [selector]);
 };
 
 export default useFade;

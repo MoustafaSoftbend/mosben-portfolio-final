@@ -88,23 +88,22 @@ const Home = () => {
       [key]: value // Using computed property names to set the value
     }));
   };
+
   useFade(".fade_left", 0, "translateX(0)");
   useFade(".fade_right", 0, "translateX(0)");
   useFade(
-    ".orbit-svg-container h1.pivot-text",
-    0,
-    "translateX(100%)",
-    2000,
-    0.75
-  );
-  useFade(".orbit-svg-container svg");
-
+  ".orbit-svg-container h1.pivot-text",
+  0,
+  "translateX(100%)",
+  2000,
+  0.75
+);
+useFade(".orbit-svg-container svg");
 
   useEffect(() => {
+    cardRotation();
     // Typer();
     scroller();
-  
-    cardRotation();
     // fade_text_svg();
     const fetchData = async (urls: string[]) => {
       try {
