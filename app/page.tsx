@@ -101,8 +101,8 @@ const Home = () => {
 
 
   useEffect(() => {
-    scroller();
     // Typer();
+    scroller();
   
     cardRotation();
     // fade_text_svg();

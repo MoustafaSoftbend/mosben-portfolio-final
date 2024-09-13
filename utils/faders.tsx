@@ -18,7 +18,8 @@ const useFade = (
 
   useEffect(() => {
     const observerOptions: IntersectionObserverOptions = {
-      threshold: threshold,
+      rootMargin: "0px 1000px 0px 1000px", // No margin around the root
+      threshold: 0.1, // Trigger when 10% of the observed element is visible
     };
 
     const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
