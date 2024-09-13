@@ -30,7 +30,8 @@ const useFade = (
           target.style.opacity = "1";
           target.style.transform = "translateX(0%)";
           target.style.transform = "scale(1)";
-          // observer.unobserve(target);
+          console.log(target)
+          observer.unobserve(target);
 
         }
         // else {

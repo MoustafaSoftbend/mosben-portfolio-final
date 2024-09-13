@@ -10,6 +10,7 @@ export const scroller = () => {
     // Check if slide_right exists before adding the event listener
     if (slide_right) {
       slide_right.addEventListener("click", () => {
+        console.log("right clicked")
         position >= right_pos ? (position = right_pos) : (position += 150);
         carousel.scrollLeft = position;
       });
@@ -18,6 +19,7 @@ export const scroller = () => {
     // Check if slide_left exists before adding the event listener
     if (slide_left) {
       slide_left.addEventListener("click", () => {
+        console.log("right left")
         position == 0 ? (position = 0) : (position -= 150);
         carousel.scrollLeft = position;
       });
