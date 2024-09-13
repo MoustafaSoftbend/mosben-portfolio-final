@@ -30,14 +30,13 @@ const useFade = (
           target.style.transform = "translateX(0%)";
           target.style.transform = "scale(1)";
 
-          observer.unobserve(target);
-
         }
         // else {
         //   target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
         //   target.style.opacity = initialOpacity.toString();
         //   target.style.transform = initialTransform;
         // }
+        observer.unobserve(target);
       });
       
 
