@@ -101,6 +101,7 @@ const Home = () => {
 useFade(".orbit-svg-container svg");
 
   useEffect(() => {
+    document.body.removeAttribute("cz-shortcut-listen");
     cardRotation();
     // Typer();
     scroller();

@@ -29,6 +29,7 @@
     "cloudinary": "^2.2.0",
     "cloudinary-core": "^2.13.1",
     "dotenv": "^16.4.5",
+    "intersection-observer": "^0.12.2",
     "lottie-react": "^2.4.0",
     "next": "14.0.4",
     "nodemailer": "^6.9.15",
