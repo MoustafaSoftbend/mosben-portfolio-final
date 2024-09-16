@@ -97,10 +97,11 @@ const Home = () => {
   "translateX(100%)",
   2000,
   0.75
-);
-useFade(".orbit-svg-container svg");
+  );
+  useFade(".orbit-svg-container svg");
 
   useEffect(() => {
+
     cardRotation();
     // Typer();
     scroller();

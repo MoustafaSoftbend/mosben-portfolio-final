@@ -11,50 +11,45 @@ const useFade = (
   initialOpacity: number = 0,
   initialTransform: string = "translateX(-100%)",
   animationDuration: number = 2000,
-  threshold: number = 0,
+  threshold: number = 0.1, // You set this value, so I moved it to a default value
   rootMargin: string = "0px 200px 0 200px",
 ) => {
   const elementsRef = useRef<HTMLElement[]>([]);
-  const selectedElements = document.querySelectorAll(selector);
-  elementsRef.current = Array.from(selectedElements) as HTMLElement[];
+
+  useEffect(() => {
+    // DOM manipulation should be inside useEffect
+    const selectedElements = document.querySelectorAll(selector);
+    elementsRef.current = Array.from(selectedElements) as HTMLElement[];
+
     const observerOptions: IntersectionObserverOptions = {
-      rootMargin: "0px 1000px 0px 1000px", // No margin around the root
-      threshold: 0.1, // Trigger when 10% of the observed element is visible
+      threshold, // Trigger when 10% of the observed element is visible
     };
 
-    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const target = entry.target as HTMLElement;
         if (entry.isIntersecting) {
+          // Apply fade-in effects
           // target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
           target.style.opacity = "1";
-          target.style.transform = "translateX(0%)";
-          target.style.transform = "scale(1)";
-          console.log(target)
+          target.style.transform = "translateX(0%) scale(1)";
+
+          // Unobserve the element after it has animated
           observer.unobserve(target);
-
         }
-        // else {
-        //   target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
-        //   target.style.opacity = initialOpacity.toString();
-        //   target.style.transform = initialTransform;
-        // }
       });
-      
+    }, observerOptions);
 
-    };
-
-
-
-    const observer = new IntersectionObserver(
-      intersectionCallback,
-      observerOptions,
-    );
-
+    // Observe each selected element
     elementsRef.current.forEach((element) => {
       observer.observe(element);
     });
 
+    // Cleanup observer on unmount
+    return () => {
+      elementsRef.current.forEach((element) => observer.unobserve(element));
+    };
+  }, [selector, threshold, animationDuration]); // Dependencies for useEffect
 };
 
 export default useFade;
