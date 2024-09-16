@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useRef } from "react";
 
 interface IntersectionObserverOptions {
@@ -13,7 +12,7 @@ const useFade = (
   initialTransform: string = "translateX(-100%)",
   animationDuration: number = 2000,
   threshold: number = 0.1,
-  rootMargin: string = "0px 200px 0 200px",
+  // rootMargin: string = "0px 200px 0px 200px", // Ensure this is in the correct format
 ) => {
   const elementsRef = useRef<HTMLElement[]>([]);
 
@@ -21,8 +20,13 @@ const useFade = (
     // Check if window exists to ensure it's only run on the client-side
     if (typeof window === 'undefined') return;
 
+    // Validate that the rootMargin has the correct format
+    // const validRootMargin = /^(\d+px|\d+%) (\d+px|\d+%) (\d+px|\d+%) (\d+px|\d+%)$/.test(rootMargin)
+    //   ? rootMargin
+    //   : "0px 200px 0px 200px"; // Fallback if invalid
+
     const observerOptions: IntersectionObserverOptions = {
-      rootMargin,
+      rootMargin: "0px 200px 0px 200px", // Use validated rootMargin
       threshold,
     };
 
@@ -30,15 +34,9 @@ const useFade = (
       entries.forEach((entry) => {
         const target = entry.target as HTMLElement;
         if (entry.isIntersecting) {
-          // Ensure transition is applied for animation
           target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
           target.style.opacity = "1";
-          target.style.transform = "translateX(0%)";
-          
-          // Optionally use scale as well
-          target.style.transform += " scale(1)";
-
-          // Unobserve element after animation to avoid repeated triggers
+          target.style.transform = "translateX(0%) scale(1)";
           observer.unobserve(target);
         }
       });
@@ -53,7 +51,7 @@ const useFade = (
     return () => {
       observer.disconnect();
     };
-  }, [selector, initialOpacity, initialTransform, animationDuration, threshold, rootMargin]);
+  }, [selector, initialOpacity, initialTransform, animationDuration, threshold]);
 
   useEffect(() => {
     const selectedElements = document.querySelectorAll(selector);
