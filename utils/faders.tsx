@@ -11,45 +11,39 @@ const useFade = (
   initialOpacity: number = 0,
   initialTransform: string = "translateX(-100%)",
   animationDuration: number = 2000,
-  threshold: number = 0,
+  threshold: number = 0.1,
   rootMargin: string = "0px 200px 0 200px",
 ) => {
   const elementsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
+    // Check if window exists to ensure it's only run on the client-side
+    if (typeof window === 'undefined') return;
+
     const observerOptions: IntersectionObserverOptions = {
-      rootMargin: "0px 1000px 0px 1000px", // No margin around the root
-      threshold: 0.1, // Trigger when 10% of the observed element is visible
+      rootMargin,
+      threshold,
     };
 
-    const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
+    const intersectionCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       entries.forEach((entry) => {
         const target = entry.target as HTMLElement;
         if (entry.isIntersecting) {
-          // target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
+          // Ensure transition is applied for animation
+          target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
           target.style.opacity = "1";
           target.style.transform = "translateX(0%)";
-          target.style.transform = "scale(1)";
-          console.log(target)
+          
+          // Optionally use scale as well
+          target.style.transform += " scale(1)";
+
+          // Unobserve element after animation to avoid repeated triggers
           observer.unobserve(target);
-
         }
-        // else {
-        //   target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
-        //   target.style.opacity = initialOpacity.toString();
-        //   target.style.transform = initialTransform;
-        // }
       });
-      
-
     };
 
-
-
-    const observer = new IntersectionObserver(
-      intersectionCallback,
-      observerOptions,
-    );
+    const observer = new IntersectionObserver(intersectionCallback, observerOptions);
 
     elementsRef.current.forEach((element) => {
       observer.observe(element);
@@ -58,7 +52,7 @@ const useFade = (
     return () => {
       observer.disconnect();
     };
-  }, [initialOpacity, initialTransform, animationDuration, threshold]);
+  }, [selector, initialOpacity, initialTransform, animationDuration, threshold, rootMargin]);
 
   useEffect(() => {
     const selectedElements = document.querySelectorAll(selector);
