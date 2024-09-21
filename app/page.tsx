@@ -146,7 +146,7 @@ const Home = () => {
 
     // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
-      setUrlsState(["https://mosben-portfolio-final-283wxmdfp-moustafasoftbends-projects.vercel.app/", "https://ygh6gy-3000.csb.app/"]);
+      setUrlsState(["https://mosben-portfolio-final-283wxmdfp-moustafasoftbends-projects.vercel.app/", "https://blog-moyjrz6he-moustafasoftbends-projects.vercel.app/", "https://grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app/"]);
     }
     // console.log(urlsState);
     // const linkLength = urls.length;
