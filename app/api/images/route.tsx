@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
     const folders = await handleFolderCall();
 
     const folderName =
-      folders.length > 0 ? `Screen_${folders.folders.length}` : "Screen_0";
-
+      folders.total_count > 0 ? `Screen_${folders.folders.length}` : "Screen_0";
+      console.log(folders.total_count)
     // return NextResponse.json(folderName)
 
     // Check if the url variable is an array

@@ -10,7 +10,8 @@ export const screenshotsController = async (
     try {
       const existingScreens = await get_screens();
       // Ensure that existingScreens is checked properly
-      if (existingScreens) {
+      console.log(Object.keys(existingScreens).length)
+      if (existingScreens &&Object.keys(existingScreens).length ==urls.length) {
         console.log(existingScreens)
         console.log(`Screens exist for ${url}:`, existingScreens);
         screens.push(existingScreens);

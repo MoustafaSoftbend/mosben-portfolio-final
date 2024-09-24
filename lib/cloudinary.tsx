@@ -18,7 +18,7 @@ interface UploadParams {
 
 export const handleCloudinaryUpload = async ({
   path,
-  folderName = "Folder_0",
+  folderName
 }: UploadParams) => {
   const result = await cloudinary.uploader.upload(path, {
     folder: folderName,
