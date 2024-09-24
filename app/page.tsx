@@ -109,7 +109,6 @@ const Home = () => {
     const fetchData = async (urls: string[]) => {
       try {
         const screens = await screenshotsController(urls);
-        console.log(screens)
         if (Array.isArray(screens)) {
           setScreenShots(screens);
         }
@@ -146,7 +145,7 @@ const Home = () => {
 
     // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
-      setUrlsState(["/", "https://blog-moyjrz6he-moustafasoftbends-projects.vercel.app/", "https://grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app/"]);
+      setUrlsState(["https://mosben-portfolio-final.vercel.app", "https://blog-dusky-psi.vercel.app", "grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app"]);
     }
     // console.log(urlsState);
     // const linkLength = urls.length;
@@ -166,11 +165,15 @@ const Home = () => {
       fetchData(urlsState);
       // const intervalId = setInterval(fetchData(urlsState), 60000);
     }
-    if (screenShots.length > 0) {
+    if (urlsState.length > 0 && screenShots.length>0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
-      // screenShots.forEach((screen, index) => {
-      //   console.log(key={index}>screen[Object.keys(screen)]);
-      // });
+      screenShots.forEach((screen, index) => {
+      //   console.log(`Screens/Screen_0`)
+      // console.log(screenShots)
+      console.log(urlsState[index])
+        
+      });
+      
     }
 
     // links.forEach((link) => {});
@@ -410,7 +413,7 @@ const Home = () => {
             {screenShots && screenShots.length > 0 ? (
               screenShots.map((screen,index) => (
                 <Link
-                  href={urlsState && urlsState.length > 0 ? urlsState[0] : "/"}
+                  href={urlsState && urlsState.length > 0 ? urlsState[index] : "/"}
                   className="card"
                   key={index}
                 >
@@ -433,8 +436,8 @@ const Home = () => {
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[0]][1]
-                            ? screen[Object.keys(screen)[0]][1].secure_url
+                          screen[Object.keys(screen)[index]][1]
+                            ? screen[Object.keys(screen)[index]][1].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -446,8 +449,8 @@ const Home = () => {
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[0]][2]
-                            ? screen[Object.keys(screen)[0]][2].secure_url
+                          screen[Object.keys(screen)[index]][2]
+                            ? screen[Object.keys(screen)[index]][2].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -459,8 +462,8 @@ const Home = () => {
                         src={
                           screen &&
                           Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[0]][3]
-                            ? screen[Object.keys(screen)[0]][3].secure_url
+                          screen[Object.keys(screen)[index]][3]
+                            ? screen[Object.keys(screen)[index]][3].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"

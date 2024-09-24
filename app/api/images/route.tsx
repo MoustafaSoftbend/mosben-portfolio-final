@@ -24,14 +24,17 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { url, fullPage } = await request.json();
+    const { url, fullPage, length } = await request.json();
 
     // Get the last folder name
     const folders = await handleFolderCall();
 
     const folderName =
       folders.total_count > 0 ? `Screen_${folders.folders.length}` : "Screen_0";
-      console.log(folders.total_count)
+      
+      if(folders.total_count >= length){
+        return
+      }
     // return NextResponse.json(folderName)
 
     // Check if the url variable is an array

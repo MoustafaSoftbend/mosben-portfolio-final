@@ -7,25 +7,30 @@ export const screenshotsController = async (
 
   for (const url of urls) {
     console.log(url)
+    const length: number = screens.length
     try {
       const existingScreens = await get_screens();
       // Ensure that existingScreens is checked properly
-      console.log(Object.keys(existingScreens).length)
-      if (existingScreens &&Object.keys(existingScreens).length ==urls.length) {
+      if(existingScreens.status==500) {
+        return screens;
+      }
+      if (existingScreens &&Object.keys(existingScreens).length >=urls.length && existingScreens.status) {
         console.log(existingScreens)
         console.log(`Screens exist for ${url}:`, existingScreens);
         screens.push(existingScreens);
       } else {
         // If no existing screens, create new ones
-        const createdScreens = await createScreens(url); // Make sure foldername is passed
+        const createdScreens = await createScreens(url,length); // Make sure foldername is passed
         console.log(`Screens created for ${url}:`, createdScreens);
+        if(createdScreens.status==500) {
+          return screens;
+        }
         screens.push(createdScreens);
       }
     } catch (error) {
       console.error(`Error processing ${url}:`, error);
     }
   }
-console.log(screens)
   return screens;
 };
 
@@ -44,11 +49,12 @@ const get_screens = async () => {
   }
 };
 
-const createScreens = async (url: string) => {
+const createScreens = async (url: string, length:number) => {
   try {
     const response = await axios.post("/api/images", {
       url,
       fullPage: true,
+      length
       // foldername,
     });
 
