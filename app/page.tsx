@@ -280,7 +280,7 @@ const Home = () => {
 
             <div className="profile-content">
               <h1 className="profile-title fade_right">
-              Hi there, I'm MOUSTAFA, a driven electrical engineer turned full-stack developer. 
+              Hi there, I&apos;m MOUSTAFA, a driven electrical engineer turned full-stack developer. 
               </h1>
               <p className="fade_right">
               I bring engineering precision and problem-solving expertise to the world of code, with a specialization in frontend technologies Combining my technical foundation with a passion for innovation, I create seamless, scalable, and high-performance digital solutions that elevate both user experience and functionality. Let’s power up the future, one line of code at a time.
@@ -505,7 +505,7 @@ const Home = () => {
             <div className="form-container">
               <h1 className="form-title">Lets Connect</h1>
               <p>
-              Have a project in mind or just want to say hello? I'd love to hear from you! Whether you're looking to collaborate, have a question, or want to discuss new opportunities, feel free to reach out.
+              Have a project in mind or just want to say hello? I&apos;d love to hear from you! Whether you&apos;re looking to collaborate, have a question, or want to discuss new opportunities, feel free to reach out.
               </p>
               <Form />
             </div>
