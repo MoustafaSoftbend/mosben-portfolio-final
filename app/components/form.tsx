@@ -31,11 +31,13 @@ const Form = () => {
   const sendData = async (data:any) => {
     const {firstName, lastName, email,message} = data
     try {
-      const emal = await sendEmail({firstName, lastName, email,message});
-      
+      const inquiry = await sendEmail({firstName, lastName, email,message});
+      return inquiry
+
     } catch (error) {
       console.error("Error fetching screenshots:", error);
     }
+    
   };
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -49,8 +51,7 @@ const Form = () => {
     } 
     // Send data to backend or do whatever you want
     const {firstName, lastName, email,message} = data
-    if (errors && errors.length > 0 && warnMessage){
-      console.log(warnMessage.current);
+    if (errors && Object.keys(errors).length > 0 && warnMessage){
       warnMessage.current?.classList.add('warning-error')
     } else {
       warnMessage.current?.classList.remove('warning-error')
