@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef , useState} from "react";
 
 import {sendEmail} from "../controller/sendMailer"
 
@@ -28,18 +28,18 @@ const Form = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const sendData = async (data: string[]) => {
+  const sendData = async (data:any) => {
+    const {firstName, lastName, email,message} = data
     try {
-      const emal = await sendEmail(data);
+      const emal = await sendEmail({firstName, lastName, email,message});
       
     } catch (error) {
       console.error("Error fetching screenshots:", error);
     }
   };
 
-  let input
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    if (Object.keys(data).length > 0) {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if (Object.keys(errors).length > 0) {
     console.log(Object.keys(data).length);
 
       document.documentElement.style.setProperty(
@@ -49,12 +49,31 @@ const Form = () => {
     } 
     // Send data to backend or do whatever you want
     const {firstName, lastName, email,message} = data
-    // const response = await sendData({firstName, lastName, email,message})
+    if (errors && errors.length > 0 && warnMessage){
+      console.log(warnMessage.current);
+      warnMessage.current?.classList.add('warning-error')
+    } else {
+      warnMessage.current?.classList.remove('warning-error')
+
+    }
+    if (firstName && lastName && email  && message) {   
+
+    const response = await sendData({firstName, lastName, email,message});
+    if (response.status === 200 && warnMessage){
+      warnMessage.current?.classList.add('warning-sucess ')
+    }else {
+      warnMessage.current?.classList.remove('warning-sucess ')
+    }
+    }
   };
 
   const inputRef = useRef<NodeListOf<HTMLInputElement | HTMLTextAreaElement>>();
+  const warnMessage = useRef<HTMLSpanElement | null>(null);
+
 
   useEffect(() => {
+    warnMessage.current = document.querySelector(".warning-form-data")
+    console.log(warnMessage.current)
     inputRef.current = document.querySelectorAll(".contact-form .input-box input, .contact-form .input-box textarea");
     inputRef.current.forEach((inputField) => {
       inputField.addEventListener("focus", () => {
@@ -103,9 +122,17 @@ const Form = () => {
     } else {
       document.documentElement.style.setProperty("--animation-color", "orange");
     }
-  }, [input, errors]);
-  
 
+  }, [inputRef, errors, warnMessage]);
+  
+  const sumbmitQuery:any= async  (message:any)  => {
+    const sendAction = await sendEmail(message)
+    if (sendAction.status && sendAction.status === 200){
+      console.log('email sent')
+    }else {
+      console.log('email Not sent')
+    }
+  }
   return (
     <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="form-body min-[500px]:flex min-[500px]:flex-row pr-[3]">
@@ -201,7 +228,7 @@ const Form = () => {
               },
             })}
           />
-          <span className="message-label">Message</span>
+          <span className="message-label" >Message</span>
           {errors.message && (
             <span className="error-span">{errors.message.message}</span>
           )}
@@ -212,9 +239,6 @@ const Form = () => {
       <button
         className="btn btn-primary"
         type="submit"
-        onClick={() => {
-          console.log(errors);
-        }}
       >
         <span className="submit-text">Send</span>
         <FontAwesomeIcon className="icon" icon={faPaperPlane} />

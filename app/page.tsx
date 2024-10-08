@@ -25,16 +25,23 @@ import Link from "next/link";
 
 import { scroller } from "../utils/scroller";
 
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
 // import { fade_left, fade_right, fade_text_svg } from "../utils/faders";
 import useFade from "../utils/faders";
 import { Typer } from "../utils/typer";
 import { cardRotation } from "../utils/cardRotation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { throttle } from 'lodash';
 
 import Server_svg from "../public/images/server_svg.svg";
 
 import { screenshotsController } from "./controller/screenshotsController";
 import {getStaticController} from "./controller/getStaticController"
+
+
+import Typewriter from "./components/typer";
 
 const Home = () => {
   const defaultOptions = {
@@ -145,7 +152,7 @@ const Home = () => {
 
     // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
-      setUrlsState(["https://mosben-portfolio-final.vercel.app", "https://blog-dusky-psi.vercel.app", "grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app"]);
+      setUrlsState(["mosben-portfolio-final.vercel.app", "blog-dusky-psi.vercel.app", "grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app"]);
     }
     // console.log(urlsState);
     // const linkLength = urls.length;
@@ -162,8 +169,11 @@ const Home = () => {
       screenShots.length == 0 &&
       urlsState.length != screenShots.length
     ) {
-      fetchData(urlsState);
-      // const intervalId = setInterval(fetchData(urlsState), 60000);
+      setTimeout(() => {
+        fetchData(urlsState)
+      }, 10000);
+      // fetchData(urlsState);
+      // const intervalId = setInterval(fetchData(urlsState), 6000);
     }
     if (urlsState.length > 0 && screenShots.length>0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
@@ -208,116 +218,27 @@ const Home = () => {
             />
           </div>
           <div className="nav-body">
+
             <h1 className="nav-title clr-white ">
-              <span className="typed-char">E</span>
-              <span className="typed-char">l</span>
-              <span className="typed-char">e</span>
-              <span className="typed-char">v</span>
-              <span className="typed-char">a</span>
-              <span className="typed-char">t</span>
-              <span className="typed-char">e</span>
-              <span className="typed-char"> y</span>
-              <span className="typed-char">o</span>
-              <span className="typed-char">u</span>
-              <span className="typed-char">r</span>
+               Crafting 
               {/* Elevate your */}
               <span className="highlight-primary">
-                <span className="typed-char">S</span>
-                <span className="typed-char">o</span>
-                <span className="typed-char">f</span>
-                <span className="typed-char">t</span>
-                <span className="typed-char">w</span>
-                <span className="typed-char">a</span>
-                <span className="typed-char">r</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char"> s</span>
-                <span className="typed-char">l</span>
-                <span className="typed-char">u</span>
-                <span className="typed-char">t</span>
-                <span className="typed-char">i</span>
-                <span className="typed-char">o</span>
-                <span className="typed-char">n</span>
-                <span className="typed-char"> ,</span>
+              Digital Experiences,
                 {/* software solution , */}
               </span>
-              <span className="typed-char">C</span>
-              <span className="typed-char">r</span>
-              <span className="typed-char">a</span>
-              <span className="typed-char">f</span>
-              <span className="typed-char">t</span>
-              <span className="typed-char">i</span>
-              <span className="typed-char">n</span>
-              <span className="typed-char">g</span>
-              <span className="typed-char"> B</span>
-              <span className="typed-char">e</span>
-              <span className="typed-char">a</span>
-              <span className="typed-char">u</span>
-              <span className="typed-char">t</span>
-              <span className="typed-char">i</span>
-              <span className="typed-char">f</span>
-              <span className="typed-char">u</span>
-              <span className="typed-char">l</span>
-              <span className="typed-char"> I</span>
-              <span className="typed-char">n</span>
-              <span className="typed-char">t</span>
-              <span className="typed-char">e</span>
-              <span className="typed-char">r</span>
-              <span className="typed-char">f</span>
-              <span className="typed-char">a</span>
-              <span className="typed-char">c</span>
-              <span className="typed-char">e</span>
-              <span className="typed-char">s</span>
+              One Line at a Time
               {/* Crafting Beautiful Interfaces */}
               <span className="highlight-secondary">
-                <span className="typed-char">O</span>
-                <span className="typed-char">n</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char"> L</span>
-                <span className="typed-char">i</span>
-                <span className="typed-char">n</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char"> o</span>
-                <span className="typed-char">f</span>
-                <span className="typed-char"> C</span>
-                <span className="typed-char">o</span>
-                <span className="typed-char">d</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char"> a</span>
-                <span className="typed-char">t</span>
-                <span className="typed-char"> a</span>
-                <span className="typed-char"> T</span>
-                <span className="typed-char">i</span>
-                <span className="typed-char">m</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char">!</span>
+              Turning Code into Creativity
                 {/* One Line of Code at a Time! */}
               </span>
-              <span className="typed-char">a</span>
-              <span className="typed-char">n</span>
-              <span className="typed-char">d</span>
+              and 
               {/* and */}
               <span className="highlight-secondary">
-                <span className="typed-char">e</span>
-                <span className="typed-char">s</span>
-                <span className="typed-char">c</span>
-                <span className="typed-char">a</span>
-                <span className="typed-char">l</span>
-                <span className="typed-char">t</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char"> y</span>
-                <span className="typed-char">o</span>
-                <span className="typed-char">u</span>
-                <span className="typed-char">r</span>
-                <span className="typed-char"> b</span>
-                <span className="typed-char">u</span>
-                <span className="typed-char">i</span>
-                <span className="typed-char">s</span>
-                <span className="typed-char">n</span>
-                <span className="typed-char">e</span>
-                <span className="typed-char">s</span>
-                <span className="typed-char">s</span>
                 {/* escalte your buisness */}
+                Empowering Ideas Through 
               </span>
+              Web Development
             </h1>
             <div className="nav-footer flex flex-row ">
               <Link href="">
@@ -345,7 +266,9 @@ const Home = () => {
 
           <div className="about-section-container flex flex-col">
             <div className="profile-img-container block relative">
-              <div className="profile-overlay"></div>
+              <div className="profile-overlay color-[white]">
+                <Typewriter />
+              </div>
               <div className="profile-picture profile">
                 <Image
                   src={staticData && staticData['static/profile']? staticData['static/profile'] :"/images/profile.jpg"}
@@ -357,14 +280,10 @@ const Home = () => {
 
             <div className="profile-content">
               <h1 className="profile-title fade_right">
-                Hi there , I am MOUSTAFA your coolest full stack developper. I
-                specialize in front end technologies used with passion and
-                precision
+              Hi there, I'm MOUSTAFA, a driven electrical engineer turned full-stack developer. 
               </h1>
               <p className="fade_right">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit
-                ratione culpa nostrum enim porro corrupti assumenda consectetur
-                eum inventore esse.
+              I bring engineering precision and problem-solving expertise to the world of code, with a specialization in frontend technologies Combining my technical foundation with a passion for innovation, I create seamless, scalable, and high-performance digital solutions that elevate both user experience and functionality. Let’s power up the future, one line of code at a time.
               </p>
               <div className="profile-buttons flex flex-row fade_right">
                 <Link href="">
@@ -482,7 +401,7 @@ const Home = () => {
               ))
             ) : (
               <Link href="/" className="card">
-                <div className="card-img-grid">
+                {/* <div className="card-img-grid">
                   <div className="img-loader">
                     <Image
                       className="img-loader p-[3]"
@@ -522,7 +441,26 @@ const Home = () => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Dolore, quod.
                   </small>
-                </div>
+                </div> */}
+
+<Stack spacing={1} >
+      {/* For variant="text", adjust the height via font-size */}
+
+      {/* For other variants, adjust the size with `width` and `height` */}
+      {/* <Skeleton variant="circular" width={40} height={40} /> */}
+      {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={300} height={200} />
+      <div className="flex flex-row gap-2">
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+
+      </div>
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' ,animationDuration: '1.5s',}} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+
+    </Stack>
               </Link>
             )}
           </div>
@@ -546,8 +484,7 @@ const Home = () => {
                 <small className="camel-case-logo">MB</small> Tech
               </h1>
               <p className="contact-text p-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Doloribus reiciendis veritatis, amet totam suscipit voluptates?
+              Cutting-edge solutions at your fingertips... let’s bring your vision to life. Reach out to us today!
               </p>
               <div className="social-links-container">
                 <Link className="Social-logo" href="https://www.facebook.com">
@@ -568,9 +505,7 @@ const Home = () => {
             <div className="form-container">
               <h1 className="form-title">Lets Connect</h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi
-                aliquid explicabo vero error. Ullam quos quas tenetur?
-                Voluptatum, suscipit quaerat?
+              Have a project in mind or just want to say hello? I'd love to hear from you! Whether you're looking to collaborate, have a question, or want to discuss new opportunities, feel free to reach out.
               </p>
               <Form />
             </div>

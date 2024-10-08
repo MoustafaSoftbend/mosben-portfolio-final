@@ -11,7 +11,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     const uploads = await handleGetRequest();
-    console.log(uploads)
     return NextResponse.json(uploads);
   } catch (error) {
     if (error instanceof Error) {
@@ -33,13 +32,13 @@ export async function POST(request: NextRequest) {
       folders.total_count > 0 ? `Screen_${folders.folders.length}` : "Screen_0";
       
       if(folders.total_count >= length){
-        return
+        return NextResponse.json({}, { status: 500 });
+      
       }
     // return NextResponse.json(folderName)
 
     // Check if the url variable is an array
     let results;
-    console.log(url)
     if (Array.isArray(url)) {
       // Handle multiple URLs
 
@@ -76,7 +75,6 @@ const handlePostRequest = async (options: {
   folderName?: string;
 }) => {
   const { url, fullPage, index, folderName } = options;
-  console.log(folderName);
 
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -134,7 +132,7 @@ const handlePostRequest = async (options: {
           folder: true,
           folderName: `Screens/${folderName}`,
         });
-        console.log(uploadResponse);
+        // console.log(uploadResponse);
         await fs.unlink(`public/screenshots/${screenshot}`);
         return uploadResponse;
       })

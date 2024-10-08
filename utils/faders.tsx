@@ -32,7 +32,8 @@ const useFade = (
           // Apply fade-in effects
           // target.style.transition = `opacity ${animationDuration}ms, transform ${animationDuration}ms`;
           target.style.opacity = "1";
-          target.style.transform = "translateX(0%) scale(1)";
+          target.style.transform = "scale(1)";
+          target.style.transform = "translateX(0%)";
 
           // Unobserve the element after it has animated
           observer.unobserve(target);
