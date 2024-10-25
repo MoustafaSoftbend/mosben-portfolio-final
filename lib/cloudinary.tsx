@@ -39,11 +39,10 @@ type Accumulator = {
   [key: string]: Resource[];
 };
 
-export const handleGetCloudinaryUploads = async (folder: string = "Screens") => {
-  console.log(folder)
+export const handleGetCloudinaryUploads = async () => {
 
   const resources = await cloudinary.search
-    .expression(`folder:${folder}* AND resource_type:image`)
+    .expression(`resource_type:image`)
     .sort_by("created_at", "desc")
     .max_results(500)
     .execute();

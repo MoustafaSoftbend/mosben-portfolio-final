@@ -7,12 +7,26 @@ import {
 } from "../../../lib/cloudinary";
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from "next/server";
+import {RateLimitmiddleware} from "../../middleware/Rate-limit";
+
 
 export async function GET(request: NextRequest) {
+  let response:any = []
+  let results:any = []
   try {
-    const uploads = await handleGetRequest();
-    return NextResponse.json(uploads);
-  } catch (error) {
+    await RateLimitmiddleware(request);
+    const folders = await handleFolderCall();
+    if (folders.total_count > 0) {
+      const uploadPromises = folders.folders.map(async (folder:any) => {
+        const uploads = await handleGetRequest();
+        return uploads
+      });
+      results = await Promise.all(uploadPromises);
+    }
+      response.push(...results);
+    return NextResponse.json(response.length>0 ? response : { message: "No uploads found" });
+  }
+   catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
@@ -23,14 +37,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await RateLimitmiddleware(request);
+
     const { url, fullPage, length } = await request.json();
 
     // Get the last folder name
     const folders = await handleFolderCall();
 
     const folderName =
-      folders.total_count > 0 ? `Screen_${folders.folders.length}` : "Screen_0";
-      
+      folders.total_count > 0 ? `Screen_${url}` : "Screen_0";
+      console.log(folders.total_count,length)
       if(folders.total_count >= length){
         return NextResponse.json({}, { status: 500 });
       
@@ -52,6 +68,7 @@ export async function POST(request: NextRequest) {
       // Handle single URL
       results = await handlePostRequest({ url, fullPage, folderName });
     }
+    console.log(results);
     return NextResponse.json(results);
   } catch (error) {
     console.log(error);
@@ -89,7 +106,7 @@ const handlePostRequest = async (options: {
     index !== undefined ? `screen_${index}` : "screen"
   }`;
 
-  await page.goto(url, { waitUntil: "load" });
+  await page.goto(url, { timeout: 0 });
 
   const takeScreenshotsWhileScrolling = async () => {
     const height: number = await page.evaluate(
@@ -127,10 +144,12 @@ const handlePostRequest = async (options: {
         screenshot.startsWith(`screen_${index !== undefined ? index : ""}`)
       )
       .map(async (screenshot) => {
+        const parsedUrl = new URL(url);
+        const host = parsedUrl.hostname;
         const uploadResponse = await handleCloudinaryUpload({
           path: `public/screenshots/${screenshot}`,
           folder: true,
-          folderName: `Screens/${folderName}`,
+          folderName: `Screens/${host}`,
         });
         // console.log(uploadResponse);
         await fs.unlink(`public/screenshots/${screenshot}`);

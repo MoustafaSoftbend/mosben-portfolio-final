@@ -4,14 +4,14 @@ export const screenshotsController = async (urls: string[]): Promise<any[]> => {
   const screens: any[] = [];
 
   for (const url of urls) {
-    const length: number = screens.length;
+    const length: number = urls.length;
 
     try {
       const existingScreens = await get_screens();
-
+      console.log(existingScreens,screens)
       // Ensure that existingScreens is properly checked
-      if (existingScreens && Array.isArray(existingScreens) && existingScreens.length >= urls.length) {
-        console.log(`Screens exist for ${url}:`, existingScreens);
+      if (existingScreens) {
+        // console.log(`Screens exist for ${url}:`, existingScreens);
         screens.push(existingScreens); // Assuming existingScreens is an array
       } else {
         // If no existing screens, create new ones
@@ -32,12 +32,13 @@ export const screenshotsController = async (urls: string[]): Promise<any[]> => {
 const get_screens = async () => {
   try {
     const response = await axios.get("/api/images");
+    // console.log(response.data, response.status,response.data);
     
     // If the response is not what you expect, handle it
-    if (response.status === 200 && Array.isArray(response.data)) {
+    if (response) {
       return response.data; // Assuming the data contains screens
     }
-    return []; // Return an empty array if no data found
+    // return []; // Return an empty array if no data found
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;

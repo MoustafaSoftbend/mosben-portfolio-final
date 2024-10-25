@@ -88,6 +88,7 @@ const Home = () => {
   const [screenShots, setScreenShots] = useState<Screen[]>([]);
   const [urlsState, setUrlsState] = useState<string[]>([]);
   const [staticData, setStaticData] = useState<StaticData | null>(null);
+  const card_data = [{"H1":"Portfolio Page","P":"Portfolio built using Next js with CSR UI and SSR api handeling "},{"H1":"Bolg-app","P":"Blog Built using React js implemented with react redux "},{"H1":"Energye","P":"Front End part of a project building web app for Energy company"}]
 
   const updateStaticData = (key:string, value: any) => {
     setStaticData(prevState => ({
@@ -119,6 +120,7 @@ const Home = () => {
         if (Array.isArray(screens)) {
           setScreenShots(screens);
         }
+        console.log(screenShots);
       } catch (error) {
         console.error("Error fetching screenshots:", error);
       }
@@ -171,7 +173,8 @@ const Home = () => {
     ) {
       setTimeout(() => {
         fetchData(urlsState)
-      }, 10000);
+      }, 20000);
+      console.log(screenShots)
       // fetchData(urlsState);
       // const intervalId = setInterval(fetchData(urlsState), 6000);
     }
@@ -185,8 +188,14 @@ const Home = () => {
       });
       
     }
+if(screenShots.length > 0 && urlsState.length > 0) {
+    screenShots.forEach((screen,index) => {
+      // console.log(urlsState[index])
 
-    // links.forEach((link) => {});
+      // const parsedUrl = new URL(urlsState[index]);
+      // const folderName = urlsState[index].hostname;
+      // console.log(screen[index][`Screens/${urlsState[index]}`][0].secure_url)
+    });}
     // let screenShots = screenshotsController("https://7kwlxf-3000.csb.app/");
     // Set up an interval to fetch data periodically
     //   const intervalId = setInterval(fetchData, 2000); // Fetch data every 5 seconds
@@ -199,6 +208,7 @@ const Home = () => {
     <>
       <header className="page-head intersect">
         <div className="slider-band absolute w-[50%] top-0 left-0 h-fit">
+          
           <Image
             src={staticData && staticData['static/band']? staticData['static/band'] :"/images/band.png"}
             layout="fill"
@@ -332,69 +342,85 @@ const Home = () => {
             {screenShots && screenShots.length > 0 ? (
               screenShots.map((screen,index) => (
                 <Link
-                  href={urlsState && urlsState.length > 0 ? urlsState[index] : "/"}
+                  href={urlsState && urlsState.length > 0 ? `https://${urlsState[index]}` : "/"}
                   className="card"
                   key={index}
                 >
                   <div className="card-img-grid">
                     <div>
+                    { screen && screen.?length >0
+                            ? 
                       <Image key={index}
                         src={
-                          screen &&
-                          Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[0]][0]
-                            ? screen[Object.keys(screen)[0]][0].secure_url
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][0]
+                            ? screen[index]?[`Screens/${urlsState[index]}`][0].secure_url
                             : "/images/img-loader.svg"
                         }
+                        
                         layout="fill"
                         alt="Screenshot of the portfolio"
-                      />
+                      />:
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" />}
+
                     </div>
                     <div>
+                    {screen &&
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][1]
+                            ? 
                       <Image key={index}
                         src={
                           screen &&
-                          Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[index]][1]
-                            ? screen[Object.keys(screen)[index]][1].secure_url
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][1]
+                            ? screen[index]?[`Screens/${urlsState[index]}`][1].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
                         alt="Screenshot of the portfolio"
-                      />
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
                     </div>
                     <div>
+                    {screen &&
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][2]
+                            ? 
                       <Image key={index}
                         src={
                           screen &&
-                          Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[index]][2]
-                            ? screen[Object.keys(screen)[index]][2].secure_url
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][2]
+                            ? screen[index]?[`Screens/${urlsState[index]}`][2].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
                         alt="Screenshot of the portfolio"
-                      />
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
                     </div>
                     <div>
+                    {screen &&
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][3]
+                            ? 
                       <Image key={index}
                         src={
                           screen &&
-                          Object.keys(screen).length > 0 &&
-                          screen[Object.keys(screen)[index]][3]
-                            ? screen[Object.keys(screen)[index]][3].secure_url
+                          screen.?length > 0 &&
+                          screen[index]?[`Screens/${urlsState[index]}`][3]
+                            ? screen[index]?[`Screens/${urlsState[index]}`][3].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
                         alt="Screenshot of the portfolio"
-                      />
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded" />}
                     </div>
+
                   </div>
                   <div className="card-body">
-                    <h1 className="card-title">Tech Blog</h1>
+                    <h1 className="card-title">{card_data ? card_data[index].H1 : <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />}</h1>
                     <small className="card-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Dolore, quod.
+                    {card_data ? card_data[index].P : <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />}
                     </small>
                   </div>
                 </Link>
