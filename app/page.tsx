@@ -53,39 +53,41 @@ const Home = () => {
     },
   };
 
-  // interface Screen {
-  //   [key: string]: Array<{ secure_url: string }>;
-  //   // asset_id: string;
-  //   // public_id: string;
-  //   // folder: string;
-  //   // filename: string;
-  //   // format: string;
-  //   // version: number;
-  //   // resource_type: string;
-  //   // type: string;
-  //   // created_at: string;
-  //   // uploaded_at: string;
-  //   // bytes: number;
-  //   // width: number;
-  //   // height: number;
-  //   // aspect_ratio: number;
-  //   // pixels: number;
-  //   // url: string;
-  //   // secure_url: string;
-  //   // status: string;
-  //   // access_mode: string;
-  //   // access_control: null;
-  //   // etag: string;
-  //   // created_by: string;
-  //   // access_key: string;
-  //   // uploaded_by: string;
-  // }
+  interface Screen {
+    [index: string]: {
+      [key: string]: { secure_url: string }[];
+    };
+    // asset_id: string;
+    // public_id: string;
+    // folder: string;
+    // filename: string;
+    // format: string;
+    // version: number;
+    // resource_type: string;
+    // type: string;
+    // created_at: string;
+    // uploaded_at: string;
+    // bytes: number;
+    // width: number;
+    // height: number;
+    // aspect_ratio: number;
+    // pixels: number;
+    // url: string;
+    // secure_url: string;
+    // status: string;
+    // access_mode: string;
+    // access_control: null;
+    // etag: string;
+    // created_by: string;
+    // access_key: string;
+    // uploaded_by: string;
+  }
 
   interface StaticData {
     [key: string]: string;
   }
 
-  const [screenShots, setScreenShots] = useState<string[]>([]);
+  const [screenShots, setScreenShots] = useState<Screen[]>([]);
   const [urlsState, setUrlsState] = useState<string[]>([]);
   const [staticData, setStaticData] = useState<StaticData | null>(null);
   const card_data = [{"H1":"Portfolio Page","P":"Portfolio built using Next js with CSR UI and SSR api handeling "},{"H1":"Bolg-app","P":"Blog Built using React js implemented with react redux "},{"H1":"Energye","P":"Front End part of a project building web app for Energy company"}]
@@ -349,11 +351,10 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                 >
                   <div className="card-img-grid">
                     <div>
-                    { screen && screen.length > 0
+                    { screen
                             ? 
                       <Image key={index}
                         src={
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][0]
                             ? screen[index][`Screens/${urlsState[index]}`][0].secure_url
                             : "/images/img-loader.svg"
@@ -366,13 +367,11 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                     </div>
                     <div>
                     {screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][1]
                             ? 
                       <Image key={index}
                         src={
                           screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][1]
                             ? screen[index][`Screens/${urlsState[index]}`][1].secure_url
                             : "/images/img-loader.svg"
@@ -383,13 +382,11 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                     </div>
                     <div>
                     {screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][2]
                             ? 
                       <Image key={index}
                         src={
                           screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][2]
                             ? screen[index][`Screens/${urlsState[index]}`][2].secure_url
                             : "/images/img-loader.svg"
@@ -400,13 +397,11 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                     </div>
                     <div>
                     {screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][3]
                             ? 
                       <Image key={index}
                         src={
                           screen &&
-                          screen.length > 0 &&
                           screen[index][`Screens/${urlsState[index]}`][3]
                             ? screen[index][`Screens/${urlsState[index]}`][3].secure_url
                             : "/images/img-loader.svg"
