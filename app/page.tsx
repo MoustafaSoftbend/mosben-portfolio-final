@@ -339,56 +339,159 @@ if(screenShots.length > 0 && urlsState.length > 0) {
             icon={faCircleArrowLeft}
           />
           <div className="carousel-container">
-          {screenShots && screenShots.length > 0 ? (
-  screenShots.map((screen, index) => (
-    <Link
-      href={urlsState && urlsState.length > 0 ? `https://${urlsState[index]}` : "/"}
-      className="card"
-      key={index}
-    >
-      <div className="card-img-grid">
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i}>
-            {screen && screen.length > 0 && screen[index]?.[`Screens/${urlsState[index]}`]?.[i] ? (
-              <Image
-                src={screen[index]?.[`Screens/${urlsState[index]}`]?.[i]?.secure_url || "/images/img-loader.svg"}
-                layout="fill"
-                alt="Screenshot of the portfolio"
-              />
-            ) : (
-              <Skeleton
-                sx={{ animationDuration: '1.5s', width: '100%', height: '100%' }}
-                variant="rounded"
-              />
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="card-body">
-        <h1 className="card-title">
-          {card_data ? card_data[index].H1 : <Skeleton variant="text" sx={{ fontSize: '1rem', animationDuration: '1.5s' }} />}
-        </h1>
-        <small className="card-text">
-          {card_data ? card_data[index].P : <Skeleton variant="text" sx={{ fontSize: '1rem', animationDuration: '1.5s' }} />}
-        </small>
-      </div>
-    </Link>
-  ))
-) : (
-  <Link href="/" className="card">
-    <Stack spacing={1}>
-      <Skeleton sx={{ animationDuration: '1.5s' }} variant="rounded" width={300} height={200} />
+            {screenShots && screenShots.length > 0 ? 
+            (
+              screenShots.map((screen,index) => (
+                <Link
+                  href={urlsState && urlsState.length > 0 ? `https://${urlsState[index]}` : "/"}
+                  className="card"
+                  key={index}
+                >
+                  <div className="card-img-grid">
+                    <div>
+                    { screen && screen.length > 0
+                            ? 
+                      <Image key={index}
+                        src={
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][0]
+                            ? screen[index][`Screens/${urlsState[index]}`][0].secure_url
+                            : "/images/img-loader.svg"
+                        }
+                        
+                        layout="fill"
+                        alt="Screenshot of the portfolio"
+                      /> : <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" />} 
+
+                    </div>
+                    <div>
+                    {screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][1]
+                            ? 
+                      <Image key={index}
+                        src={
+                          screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][1]
+                            ? screen[index][`Screens/${urlsState[index]}`][1].secure_url
+                            : "/images/img-loader.svg"
+                        }
+                        layout="fill"
+                        alt="Screenshot of the portfolio"
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
+                    </div>
+                    <div>
+                    {screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][2]
+                            ? 
+                      <Image key={index}
+                        src={
+                          screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][2]
+                            ? screen[index][`Screens/${urlsState[index]}`][2].secure_url
+                            : "/images/img-loader.svg"
+                        }
+                        layout="fill"
+                        alt="Screenshot of the portfolio"
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
+                    </div>
+                    <div>
+                    {screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][3]
+                            ? 
+                      <Image key={index}
+                        src={
+                          screen &&
+                          screen.length > 0 &&
+                          screen[index][`Screens/${urlsState[index]}`][3]
+                            ? screen[index][`Screens/${urlsState[index]}`][3].secure_url
+                            : "/images/img-loader.svg"
+                        }
+                        layout="fill"
+                        alt="Screenshot of the portfolio"
+                      />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded" />
+                    }
+                    </div>
+
+                  </div>
+                  <div className="card-body">
+                    <h1 className="card-title">{card_data ? card_data[index].H1 : <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />}</h1>
+                    <small className="card-text">
+                    {card_data ? card_data[index].P : <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />}
+                    </small>
+                  </div>
+                </Link>
+              )
+            )
+            ) : 
+            (
+              <Link href="/" className="card">
+                {/* <div className="card-img-grid">
+                  <div className="img-loader">
+                    <Image
+                      className="img-loader p-[3]"
+                      src="/images/img-loader.svg"
+                      layout="fill"
+                      alt="Screenshot of the portfolio"
+                    />
+                  </div>
+                  <div className="img-loader">
+                    <Image
+                      className="img-loader"
+                      src="/images/img-loader.svg"
+                      layout="fill"
+                      alt="Screenshot of the portfolio"
+                    />
+                  </div>
+                  <div className="img-loader">
+                    <Image
+                      className="img-loader"
+                      src="/images/img-loader.svg"
+                      layout="fill"
+                      alt="Screenshot of the portfolio"
+                    />
+                  </div>
+                  <div className="img-loader">
+                    <Image
+                      className="img-loader"
+                      src="/images/img-loader.svg"
+                      layout="fill"
+                      alt="Screenshot of the portfolio"
+                    />
+                  </div>
+                </div>
+                <div className="card-body">
+                  <h1 className="card-title">Tech Blog</h1>
+                  <small className="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Dolore, quod.
+                  </small>
+                </div> */}
+
+<Stack spacing={1} >
+      {/* For variant="text", adjust the height via font-size */}
+
+      {/* For other variants, adjust the size with `width` and `height` */}
+      {/* <Skeleton variant="circular" width={40} height={40} /> */}
+      {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={300} height={200} />
       <div className="flex flex-row gap-2">
-        <Skeleton sx={{ animationDuration: '1.5s' }} variant="rounded" width={210} height={60} />
-        <Skeleton sx={{ animationDuration: '1.5s' }} variant="rounded" width={210} height={60} />
-        <Skeleton sx={{ animationDuration: '1.5s' }} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+
       </div>
-      <Skeleton variant="text" sx={{ fontSize: '1rem', animationDuration: '1.5s' }} />
-      <Skeleton variant="text" sx={{ fontSize: '1rem', animationDuration: '1.5s' }} />
-      <Skeleton variant="text" sx={{ fontSize: '1rem', animationDuration: '1.5s' }} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' ,animationDuration: '1.5s',}} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+
     </Stack>
-  </Link>
-)}
+              </Link>
+            )}
           </div>
         </div>
       </section>
