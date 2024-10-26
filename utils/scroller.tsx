@@ -1,7 +1,7 @@
 export const scroller = () => {
   const carousel = document.querySelector<HTMLElement>(".carousel-container");
-  const slide_right = document.querySelector<HTMLElement>(".arrow-right");
-  const slide_left = document.querySelector<HTMLElement>(".arrow-left");
+  const slide_right = document.querySelector<HTMLElement>(".btn-arrow-right");
+  const slide_left = document.querySelector<HTMLElement>(".btn-arrow-left");
 
   if (carousel) {
     var position = carousel.scrollLeft;

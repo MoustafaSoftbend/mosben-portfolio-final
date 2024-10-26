@@ -546,7 +546,7 @@ section.portfolio-section .carousel .carousel-container::-webkit-scrollbar {
 
 section.portfolio-section .carousel .carousel-container .card {
   height: auto;
-  width: 300px;
+  width: 400px;
 }
 
 section.portfolio-section .carousel .carousel-container .card-img-grid {
@@ -557,7 +557,7 @@ section.portfolio-section .carousel .carousel-container .card-img-grid {
   grid-row-gap: 1em;
   grid-column-gap: 1.2em;
   height: 70%;
-  width: 300px;
+  width: 370px;
   padding-bottom: 0;
   /* height: 400px;
   width: 300px; */

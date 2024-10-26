@@ -332,14 +332,20 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           <h1 className="section-title">Portfolio</h1>
         </div>
         <div className="carousel container">
+          <button className="btn btn-arrow-right">
           <FontAwesomeIcon
             className="icon arrow-right"
             icon={faCircleArrowRight}
           />
+          </button>
+          <button className="btn btn-arrow-left">
+
           <FontAwesomeIcon
             className="icon arrow-left"
             icon={faCircleArrowLeft}
           />
+          </button>
+
           <div className="carousel-container">
             {screenShots && screenShots.length > 0 ? 
             (
@@ -348,6 +354,8 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                   href={urlsState && urlsState.length > 0 ? `https://${urlsState[index]}` : "/"}
                   className="card"
                   key={index}
+                  target="_blank"
+  rel="noopener noreferrer"
                 >
                   <div className="card-img-grid">
                     <div>
@@ -424,7 +432,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
             )
             ) : 
             (
-              <Link href="/" className="card">
+              <Link href="/" className="card flex flex-row gap-[3em]">
                 {/* <div className="card-img-grid">
                   <div className="img-loader">
                     <Image
@@ -473,8 +481,44 @@ if(screenShots.length > 0 && urlsState.length > 0) {
       {/* For other variants, adjust the size with `width` and `height` */}
       {/* <Skeleton variant="circular" width={40} height={40} /> */}
       {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
-      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={300} height={200} />
-      <div className="flex flex-row gap-2">
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={400} height={200} />
+      <div className="flex flex-row gap-2 w-[400px]">
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+
+      </div>
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' ,animationDuration: '1.5s',}} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+
+    </Stack>
+<Stack spacing={1} >
+      {/* For variant="text", adjust the height via font-size */}
+
+      {/* For other variants, adjust the size with `width` and `height` */}
+      {/* <Skeleton variant="circular" width={40} height={40} /> */}
+      {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={400} height={200} />
+      <div className="flex flex-row gap-2 w-[400px]">
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
+
+      </div>
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' ,animationDuration: '1.5s',}} />
+      <Skeleton variant="text" sx={{ fontSize: '1rem',animationDuration: '1.5s', }} />
+
+    </Stack>
+<Stack spacing={1} >
+      {/* For variant="text", adjust the height via font-size */}
+
+      {/* For other variants, adjust the size with `width` and `height` */}
+      {/* <Skeleton variant="circular" width={40} height={40} /> */}
+      {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
+      <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={400} height={200} />
+      <div className="flex flex-row gap-2 w-[400px]">
       <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
       <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
       <Skeleton sx={{animationDuration: '1.5s',}} variant="rounded" width={210} height={60} />
@@ -491,8 +535,34 @@ if(screenShots.length > 0 && urlsState.length > 0) {
         </div>
       </section>
 
+      <section className="certificates">
+      <div className="section-title-container m-[2em]">
+            <div className="title-overlay"></div>
+
+            <h1 className="section-title">Certificates </h1>
+      </div>
+        
+        <div className="certificates-container flex flex-row flex-wrap container gap-[2em] h-[auto] p-[2em] m-[3em]">
+        <Link className="block w-[300px]" href="https://www.coursera.org/verify/AGBFD8K4BQB2" target="_blank" rel="noopener noreferrer">
+        <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~AGBFD8K4BQB2/CERTIFICATE_LANDING_PAGE~AGBFD8K4BQB2.jpeg" alt="Coursera Certificate" width="600" />
+        </Link>
+        <Link className="block w-[300px]" href="https://www.coursera.org/verify/HC3K6FW95BQN" target="_blank" rel="noopener noreferrer">
+        <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~HC3K6FW95BQN/CERTIFICATE_LANDING_PAGE~HC3K6FW95BQN.jpeg" alt="Coursera Certificate" width="600" />
+        </Link>
+        
+        <Link className="block w-[300px]" href="https://www.coursera.org/verify/855C2EBAQ92U" target="_blank" rel="noopener noreferrer">
+        <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~855C2EBAQ92U/CERTIFICATE_LANDING_PAGE~855C2EBAQ92U.jpeg" alt="Coursera Certificate" width="600" />
+        </Link>
+        <Link className="block w-[300px]" href="https://www.coursera.org/verify/PUWQWD7BAL27" target="_blank" rel="noopener noreferrer">
+        <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~PUWQWD7BAL27/CERTIFICATE_LANDING_PAGE~PUWQWD7BAL27.jpeg" alt="Coursera Certificate" width="600" />
+        </Link>
+
+
+        </div>
+      </section>
+
       <section className="contact-section">
-        <div className="container">
+        <div className="container m-[3em]">
           <div className="section-title-container">
             <div className="title-overlay"></div>
 
