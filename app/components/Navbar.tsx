@@ -28,29 +28,29 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="" href="/">
+              <Link href="#services-section" className="">
                 Services
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="" href="/">
+              <Link href="#projects-section" className="">
                 Projects
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="" href="/">
+              <Link href="#contact-section" className="">
                 Contact
               </Link>
             </li>
           </ul>
           <div className="nav-buttons flex flex-row gap-[1em] p-3">
-            <Link href="">
+            <Link href="#contact-section">
               <FontAwesomeIcon
                 className="icon-lg clr-secondary"
                 icon={faSquarePhone}
               />
             </Link>
-            <Link className="btn btn-primary btn-round " href="">
+            <Link className="btn btn-primary btn-round " href="#projects-section">
               Explore
             </Link>
           </div>

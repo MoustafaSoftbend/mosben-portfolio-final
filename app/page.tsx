@@ -260,14 +260,14 @@ if(screenShots.length > 0 && urlsState.length > 0) {
               Web Development
             </h1>
             <div className="nav-footer flex flex-row ">
-              <Link href="">
+              <Link href="#contact-section">
                 <FontAwesomeIcon
                   className="icon-lg clr-secondary h-auto"
                   icon={faSquarePhone}
                   size="5x"
                 />
               </Link>
-              <Link className="btn btn-primary btn-round " href="">
+              <Link className="btn btn-primary btn-round " href="#projects-section">
                 Explore
               </Link>
             </div>
@@ -275,7 +275,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
         </div>
       </header>
 
-      <section className="about-section intersect">
+      <section id="about-section" className="about-section intersect">
         <div className="container">
           <div className="section-title-container">
             <div className="title-overlay"></div>
@@ -320,7 +320,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
         </div>
       </section>
 
-      <section className="services-section">
+      <section id="services-section" className="services-section">
         <div className=" flex flex-row">
           <div className="section-title-container">
             <div className="title-overlay services-overlay"></div>
@@ -332,7 +332,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           </div>
         </div>
       </section>
-      <section className="portfolio-section">
+      <section id="projects-section" className="portfolio-section">
         <div className="section-title-container">
           <div className="title-overlay"></div>
 
@@ -565,7 +565,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
         </div>
       </section>
 
-      <section className="contact-section">
+      <section id="contact-section" className="contact-section">
         <div className="container m-[3em]">
           <div className="section-title-container">
             <div className="title-overlay"></div>
@@ -585,16 +585,16 @@ if(screenShots.length > 0 && urlsState.length > 0) {
               Cutting-edge solutions at your fingertips... let’s bring your vision to life. Reach out to us today!
               </p>
               <div className="social-links-container">
-                <Link className="Social-logo" href="https://www.facebook.com">
+                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com">
                   <FontAwesomeIcon className="icon-lg" icon={facebook} />
                 </Link>
-                <Link className="Social-logo" href="https://www.linkedin.com">
+                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/moustafa-bendib-b5a965aa/">
                   <FontAwesomeIcon className="icon-lg" icon={linkedin} />
                 </Link>
-                <Link className="Social-logo" href="https://www.github.com">
+                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://github.com/MoustafaSoftbend">
                   <FontAwesomeIcon className="icon-lg" icon={gitAwsome} />
                 </Link>
-                <Link className="Social-logo" href="https://www.x.com">
+                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://www.x.com">
                   <FontAwesomeIcon className="icon-lg" icon={x} />
                 </Link>
               </div>
@@ -622,10 +622,10 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           <Link className="Social-logo" href="/">
             <FontAwesomeIcon className="icon-lg" icon={facebook} />
           </Link>
-          <Link className="Social-logo" href="/">
+          <Link className="Social-logo" href="https://www.linkedin.com/in/moustafa-bendib-b5a965aa/">
             <FontAwesomeIcon className="icon-lg" icon={linkedin} />
           </Link>
-          <Link className="Social-logo" href="/">
+          <Link className="Social-logo" href="https://github.com/MoustafaSoftbend">
             <FontAwesomeIcon className="icon-lg" icon={gitAwsome} />
           </Link>
           <Link className="Social-logo" href="/">
