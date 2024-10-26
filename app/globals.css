@@ -183,7 +183,6 @@ section {
   font-size: 1.4rem; /* Responsive font size */
   padding: 50px;
   overflow: hidden; /* Hide overflow (if needed) */
-  display: block; /* Ensure it works for multiline text */
   padding-left: 2em ;
   line-height: 40px;
 }

@@ -547,7 +547,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
             <h1 className="section-title">Certificates </h1>
       </div>
         
-        <div className="certificates-container flex flex-row flex-wrap container gap-[2em] h-[auto] p-[2em] m-[3em]">
+        <div className="certificates-container flex flex-row flex-wrap container gap-[2em] h-[auto] p-[2em] m-[3em] justify-center">
         <Link className="block w-[300px]" href="https://www.coursera.org/verify/AGBFD8K4BQB2" target="_blank" rel="noopener noreferrer">
         <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~AGBFD8K4BQB2/CERTIFICATE_LANDING_PAGE~AGBFD8K4BQB2.jpeg" alt="Coursera Certificate" width="600" />
         </Link>
