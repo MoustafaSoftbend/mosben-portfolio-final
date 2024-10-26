@@ -19,6 +19,7 @@ import {
   faLinkedinIn as linkedin,
   faSquareGithub as gitAwsome,
   faSquareTwitter as x,
+  faStackOverflow as stack
 } from "@fortawesome/free-brands-svg-icons";
 
 import Link from "next/link";
@@ -585,8 +586,8 @@ if(screenShots.length > 0 && urlsState.length > 0) {
               Cutting-edge solutions at your fingertips... let’s bring your vision to life. Reach out to us today!
               </p>
               <div className="social-links-container">
-                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com">
-                  <FontAwesomeIcon className="icon-lg" icon={facebook} />
+                <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/users/10722090/moustafa-bendib">
+                  <FontAwesomeIcon className="icon-lg" icon={stack} />
                 </Link>
                 <Link className="Social-logo" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/moustafa-bendib-b5a965aa/">
                   <FontAwesomeIcon className="icon-lg" icon={linkedin} />
@@ -618,9 +619,9 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           </h1>
         </div>
 
-        <div className="social-links container">
-          <Link className="Social-logo" href="/">
-            <FontAwesomeIcon className="icon-lg" icon={facebook} />
+        <div className="social-links container w-[700px]">
+          <Link className="Social-logo" href="https://stackoverflow.com/users/10722090/moustafa-bendib">
+            <FontAwesomeIcon className="icon-lg" icon={stack} />
           </Link>
           <Link className="Social-logo" href="https://www.linkedin.com/in/moustafa-bendib-b5a965aa/">
             <FontAwesomeIcon className="icon-lg" icon={linkedin} />
@@ -639,7 +640,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           </h1>
         </div>
       </footer>
-    </>
+    </> 
   );
 };
 

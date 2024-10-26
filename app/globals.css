@@ -885,6 +885,9 @@ footer.footer-section .social-links {
 footer.footer-section .social-links .Social-logo {
   font-size: 2.5em;
 }
+footer.footer-section .social-links .Social-logo:hover {
+  color: var(--color-orange);
+}
 
 @media only screen and (max-width: 500px) {
   section.contact-section form.contact-form input {
