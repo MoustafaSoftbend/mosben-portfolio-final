@@ -358,7 +358,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
             (
               screenShots.map((screen,index) => (
                 <Link
-                  href={urlsState && urlsState.length > 0 ? `https://${urlsState[index]}` : "/"}
+                  href={urlsState && urlsState.length > 0 ? `${urlsState[index]}` : "/"}
                   className="card"
                   key={index}
                   target="_blank"
