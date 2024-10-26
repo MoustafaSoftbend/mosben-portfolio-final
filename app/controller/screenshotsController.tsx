@@ -10,7 +10,7 @@ export const screenshotsController = async (urls: string[]): Promise<any[]> => {
       const existingScreens = await get_screens();
       console.log(existingScreens,screens)
       // Ensure that existingScreens is properly checked
-      if (existingScreens) {
+      if (existingScreens && !existingScreens.message) {
         // console.log(`Screens exist for ${url}:`, existingScreens);
         screens.push(existingScreens); // Assuming existingScreens is an array
       } else {

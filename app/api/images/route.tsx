@@ -43,6 +43,13 @@ export async function POST(request: NextRequest) {
 
     // Get the last folder name
     const folders = await handleFolderCall();
+    const parsedUrl = new URL(url);
+    const host = parsedUrl.hostname;
+    // folders.array.forEach((folder:any) => {
+    //   if (folder.name === host){
+    //     const res = await axios.request
+    //   }
+    // });
 
     const folderName =
       folders.total_count > 0 ? `Screen_${url}` : "Screen_0";

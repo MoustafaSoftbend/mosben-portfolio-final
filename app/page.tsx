@@ -91,7 +91,9 @@ const Home = () => {
   const [urlsState, setUrlsState] = useState<string[]>([]);
   const [staticData, setStaticData] = useState<StaticData | null>(null);
   const card_data = [{"H1":"Portfolio Page","P":"Portfolio built using Next js with CSR UI and SSR api handeling "},{"H1":"Bolg-app","P":"Blog Built using React js implemented with react redux "},{"H1":"Energye","P":"Front End part of a project building web app for Energy company"}]
-
+const url_names = ["mosben-portfolio-final.vercel.app",
+  "blog-dusky-psi.vercel.app",
+  "grte-front.vercel.app"]
   const updateStaticData = (key:string, value: any) => {
     setStaticData(prevState => ({
       ...prevState,
@@ -119,8 +121,9 @@ const Home = () => {
     const fetchData = async (urls: string[]) => {
       try {
         const screens = await screenshotsController(urls);
-        if (Array.isArray(screens)) {
+        if (screens.length > 0){
           setScreenShots(screens);
+
         }
         console.log(screenShots);
       } catch (error) {
@@ -156,7 +159,9 @@ const Home = () => {
 
     // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
-      setUrlsState(["mosben-portfolio-final.vercel.app", "blog-dusky-psi.vercel.app", "grte-front-bcmiq0lq8-moustafasoftbends-projects.vercel.app"]);
+      setUrlsState(["https://mosben-portfolio-final.vercel.app",
+        "https://blog-dusky-psi.vercel.app",
+        "https://grte-front.vercel.app"]);
     }
     // console.log(urlsState);
     // const linkLength = urls.length;
@@ -176,10 +181,12 @@ const Home = () => {
       setTimeout(() => {
         fetchData(urlsState)
       }, 3000);
-      console.log(screenShots)
       // fetchData(urlsState);
       // const intervalId = setInterval(fetchData(urlsState), 6000);
     }
+
+    console.log(screenShots)
+
     if (urlsState.length > 0 && screenShots.length>0) {
       // console.log(screenShots[0]["Folder_0/7kwlxf-3000.csb.app"][0].secure_url);
       screenShots.forEach((screen, index) => {
@@ -196,7 +203,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
 
       // const parsedUrl = new URL(urlsState[index]);
       // const folderName = urlsState[index].hostname;
-      // console.log(screen[index][`Screens/${urlsState[index]}`][0].secure_url)
+      console.log(screen[index][`Screens/${urlsState[index]}`])
     })}
     // let screenShots = screenshotsController("https://7kwlxf-3000.csb.app/");
     // Set up an interval to fetch data periodically
@@ -362,9 +369,9 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                     { screen
                             ? 
                       <Image key={index}
-                        src={
-                          screen[index][`Screens/${urlsState[index]}`][0]
-                            ? screen[index][`Screens/${urlsState[index]}`][0].secure_url
+                        src={screen[index][`Screens/${url_names[index]}`] &&
+                          screen[index][`Screens/${url_names[index]}`][0]
+                            ? screen[index][`Screens/${url_names[index]}`][0].secure_url
                             : "/images/img-loader.svg"
                         }
                         
@@ -374,14 +381,13 @@ if(screenShots.length > 0 && urlsState.length > 0) {
 
                     </div>
                     <div>
-                    {screen &&
-                          screen[index][`Screens/${urlsState[index]}`][1]
+                    {screen                         
                             ? 
                       <Image key={index}
                         src={
-                          screen &&
-                          screen[index][`Screens/${urlsState[index]}`][1]
-                            ? screen[index][`Screens/${urlsState[index]}`][1].secure_url
+                          screen[index][`Screens/${url_names[index]}`] &&
+                          screen[index][`Screens/${url_names[index]}`][1]
+                            ? screen[index][`Screens/${url_names[index]}`][1].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -389,14 +395,13 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                       />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
                     </div>
                     <div>
-                    {screen &&
-                          screen[index][`Screens/${urlsState[index]}`][2]
+                    {screen 
                             ? 
                       <Image key={index}
                         src={
-                          screen &&
-                          screen[index][`Screens/${urlsState[index]}`][2]
-                            ? screen[index][`Screens/${urlsState[index]}`][2].secure_url
+                          screen[index][`Screens/${url_names[index]}`] &&
+                          screen[index][`Screens/${url_names[index]}`][2]
+                            ? screen[index][`Screens/${url_names[index]}`][2].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
@@ -404,14 +409,13 @@ if(screenShots.length > 0 && urlsState.length > 0) {
                       />:<Skeleton sx={{animationDuration: '1.5s',width: '100%',height: '100%'}} variant="rounded"  />}
                     </div>
                     <div>
-                    {screen &&
-                          screen[index][`Screens/${urlsState[index]}`][3]
+                    {screen 
                             ? 
                       <Image key={index}
                         src={
-                          screen &&
-                          screen[index][`Screens/${urlsState[index]}`][3]
-                            ? screen[index][`Screens/${urlsState[index]}`][3].secure_url
+                          screen[index][`Screens/${url_names[index]}`] &&
+                          screen[index][`Screens/${url_names[index]}`][3]
+                            ? screen[index][`Screens/${url_names[index]}`][3].secure_url
                             : "/images/img-loader.svg"
                         }
                         layout="fill"
