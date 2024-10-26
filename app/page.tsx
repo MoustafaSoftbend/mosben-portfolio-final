@@ -156,7 +156,7 @@ const Home = () => {
 
     // const urls = ["https://7kwlxf-3000.csb.app/", "https://ygh6gy-3000.csb.app/"];
     if (urlsState.length <= 0) {
-      setUrlsState(["mosben-portfolio-final.vercel.app", "blog-dusky-psi.vercel.app", "grte-front-5k6h4z9bx-moustafasoftbends-projects.vercel.app"]);
+      setUrlsState(["mosben-portfolio-final.vercel.app", "blog-dusky-psi.vercel.app", "grte-front-bcmiq0lq8-moustafasoftbends-projects.vercel.app"]);
     }
     // console.log(urlsState);
     // const linkLength = urls.length;
@@ -175,7 +175,7 @@ const Home = () => {
     ) {
       setTimeout(() => {
         fetchData(urlsState)
-      }, 20000);
+      }, 3000);
       console.log(screenShots)
       // fetchData(urlsState);
       // const intervalId = setInterval(fetchData(urlsState), 6000);

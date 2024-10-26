@@ -40,10 +40,17 @@ export async function POST(request: NextRequest) {
     await RateLimitmiddleware(request);
 
     const { url, fullPage, length } = await request.json();
-
+    const parsedUrl = new URL(url);
+    const host = parsedUrl.hostname;
     // Get the last folder name
     const folders = await handleFolderCall();
-
+    if (folders.length > 0) {
+      folders.array.forEach((folder:any) => {
+        if (folder.name == host) {
+          return
+        }
+      });
+    }
     const folderName =
       folders.total_count > 0 ? `Screen_${url}` : "Screen_0";
       console.log(folders.total_count,length)
