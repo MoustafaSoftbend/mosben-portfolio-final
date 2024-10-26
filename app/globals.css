@@ -177,6 +177,7 @@ section {
 
 
 .typewriter-container {
+  display: none;
   max-width: 200px; /* Limit the maximum width */
   margin: 0 auto; /* Center the container */
   font-size: 1.4rem; /* Responsive font size */
@@ -934,6 +935,10 @@ footer.footer-section .social-links .Social-logo:hover {
   .page-head .nav-title {
     font-size: 4vw;
     grid-row: span 2;
+  }
+
+  .typewriter-container {
+    display: block;
   }
 }
 
