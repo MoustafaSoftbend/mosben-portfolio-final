@@ -1017,6 +1017,12 @@ footer.footer-section .social-links .Social-logo:hover {
   section.contact-section form.contact-form label .input-box span.error-span {
     left: 0px;
   }
+  .profile-picture, .profile-overlay {
+    height: 400px;
+  }
+  .profile-img-container {
+    height: 450px;
+  }
 }
 
 @media only screen and (max-height: 670px) {
