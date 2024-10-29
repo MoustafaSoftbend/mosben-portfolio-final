@@ -619,7 +619,7 @@ if(screenShots.length > 0 && urlsState.length > 0) {
           </h1>
         </div>
 
-        <div className="social-links container w-[700px]">
+        <div className="social-links container md:w-[700px]">
           <Link className="Social-logo" href="https://stackoverflow.com/users/10722090/moustafa-bendib">
             <FontAwesomeIcon className="icon-lg" icon={stack} />
           </Link>
